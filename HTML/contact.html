@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Asset Management System</title>
+        <link rel="stylesheet" href="../CSS/contact.css" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+            rel="stylesheet" />
+    </head>
+    
+    <body>
+          <div class="alpha-message">
+        <p>**This app is in alpha testing and may not work as expected**</p>
+    </div>
+        <header class="header">
+            <div class="container">
+                <h1 class="header-title">Asset Management System</h1>
+                <nav class="main-nav">
+                    <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Data Export</a></li>
+                    <li><a href="#">Requistion Form</a></li>
+                    <li><a href="#">New Starter</a></li>
+                   <li><a href="#">Connection Test</a></li>
+                    <li><a href="#">Staff List</a></li>
+                    <li><a href="#">Log Out</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="form-container">
+                <div class="left-container">
+                    <div class="left-inner-container">
+                        <h2>Let us know</h2>
+                        <p>
+                            Whether you have an issue, a question, or want to
+                            let us know something isn't working as it should.
+                        </p>
+                        <br />
+                        <p>
+                            For anything urgent, please contact the IT helpdesk
+                            on 01234 567890
+                        </p>
+                    </div>
+                </div>
+                <div class="right-container">
+                    <div class="right-inner-container">
+                        <form id="contactForm">
+                            <h2 class="lg-view">Contact Us</h2>
+
+                            <p>* Required</p>
+
+                            <input
+                                type="text"
+                                placeholder="Name *"
+                                name="name"
+                                required />
+                            <input
+                                type="email"
+                                placeholder="Email *"
+                                name="email"
+                                required />
+                            <input
+                                type="text"
+                                placeholder="Subject *"
+                                name="subject"
+                                required />
+                            <input
+                                type="tel"
+                                placeholder="Phone"
+                                name="phone" />
+                            <textarea
+                                rows="10"
+                                placeholder="Message"
+                                name="message"
+                                required></textarea>
+                            <button type="submit">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>
+                &copy; 2024 Asset Management System. All rights reserved. |
+                Designed by
+                <a href="https://www.linkedin.com/in/richard-hamilton-319b35287"
+                    >R I Hamilton</a
+                >
+            </p>
+        </footer>
+        <script src=../JavaScript/contact.js></script>
+        <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
+        <script>
+            (function () {
+                emailjs.init("j99DxQx5GimFzJyu-"); // Replace with your EmailJS user ID
+            })();
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const contactForm = document.getElementById("contactForm");
+
+                if (contactForm) {
+                    contactForm.addEventListener("submit", function (event) {
+                        event.preventDefault();
+
+                        // Collect form data
+                        const formData = new FormData(contactForm);
+                        const templateParams = {};
+                        for (const [key, value] of formData.entries()) {
+                            templateParams[key] = value;
+                        }
+
+                        // Send email
+                        emailjs
+                            .send(
+                                "service_6atfsc6",
+                                "template_kyvdpdo",
+                                templateParams
+                            )
+                            .then(
+                                function (response) {
+                                    console.log(
+                                        "SUCCESS!",
+                                        response.status,
+                                        response.text
+                                    );
+                                    alert("Email sent successfully!");
+                                    contactForm.reset();
+                                },
+                                function (error) {
+                                    console.log("FAILED...", error);
+                                    alert(
+                                        "An error occurred while sending the email."
+                                    );
+                                }
+                            );
+                    });
+                }
+            });
+        </script>
+    </body>
+</html>

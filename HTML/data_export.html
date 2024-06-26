@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Asset Management System</title>
+        <link rel="stylesheet" href="../CSS/data_export.css" />
+    </head>
+
+    <body>
+          <div class="alpha-message">
+        <p>**This app is in alpha testing and may not work as expected**</p>
+    </div>
+        <header class="header">
+            <div class="container">
+                <h1 class="header-title">Asset Management System</h1>
+                <nav class="main-nav">
+                    <ul>
+                         <li><a href="#">Home</a></li>
+                    <li><a href="#">Staff List</a></li>
+                    <li><a href="#">Requistion Form</a></li>
+                    <li><a href="#">New Starter</a></li>
+                   <li><a href="#">Connection Test</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Log Out</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+<h2>This is not operational (yet)</h2>
+        <main class="container">
+            <section class="search-user">
+                <div class="search-container">
+                    <input
+                        type="text"
+                        id="searchInput"
+                        class="search-input"
+                        placeholder="Search by user or area" />
+                </div>
+                <div class="selectNaNoptions">
+                    <button id="selectAllButton">Select All</button>
+                    <button id="exportCSV">Export as CSV</button>
+                </div>
+                <ul id="userList" class="user-list"></ul>
+            </section>
+        </main>
+        <div id="userInfo"></div>
+        <footer class="footer">
+            <p>
+                &copy; 2024 Asset Management System. All rights reserved. |
+                Designed by
+                <a href="https://www.linkedin.com/in/richard-hamilton-319b35287"
+                    >R I Hamilton</a
+                >
+            </p>
+        </footer>
+        <script src="../JavaScript/data_export.js"></script>
+      
+    </body>
+</html>

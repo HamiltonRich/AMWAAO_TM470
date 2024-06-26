@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Asset Management System</title>
+    <link rel="stylesheet" href="../CSS/web_app.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+    <div class="alpha-message">
+        <p>**This app is in alpha testing and may/will not work or look as expected, soz**</p>
+    </div>
+    <header class="header">
+        <div class="container">
+            <h1 class="header-title">Asset Management System</h1>
+            <nav class="main-nav">
+                <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Data Export</a></li>
+                        <li><a href="#">Requistion Form</a></li>
+                        <li><a href="#">New Employee</a></li>
+                     <li><a href="#">Create Admin</a></li>
+                        <li><a href="#">Connection Test</a></li>
+                        <li><a href="#">Contact</a></li>
+                    <li><a href="#">Delete User</a></li>
+                        <li><a href="#">Log Out</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="search-user">
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="Search by user or area" />
+            </div>
+            <ul id="userList" class="user-list">
+                <!-- User list will be populated here -->
+            </ul>
+        </section>
+
+        <section class="user-details">
+            <div id="userInfo" class="user-info">
+                <!-- User information will be displayed here -->
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <p>
+            &copy; 2024 Asset Management System. All rights reserved. |
+            Designed by
+            <a href="https://www.linkedin.com/in/richard-hamilton-319b35287">R I Hamilton</a>
+        </p>
+    </footer>
+
+    <!-- Modal Structure -->
+    <div id="userModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Employee Details</h2>
+            <table id="userTable">
+                <tbody>
+                    <!-- User details will be populated here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="../JavaScript/web_app.js"></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+12/06/2024
+
+New starter removed and replaced with remove user.
+Similar form to it req but get a modal to pop up and say confirm you are in possetion of assets and then click confirm to delete user.
+
+
+Modal dont work
+change email to upn in javascript code
+
+get modals to all look the same
+get them to animate from the top 
+
+
+**web_app.html, web_app.css and web_app.js are all done. Follow this as a template**
+
+finish new user - work out what to do with manager field
+***Make if statement on airtable to determine manager. Manager done, cant get date to show on emailjs.***
+
+Need to make an asset list page. Want drop down with regions, and then how many laptops and how many phones.
+
+user authentification for areas
+
+Need to change names of files. Login needs to be called index.html for github pages.
+
+index.html
+employeeList.html
+newEmployee.html
+login_contactForm.html
+homepage.html
+reqForm.html
+deleteEmployee.html
+dataExport.html
+contactForm.html
+connectionTest.html
+
+eform is nearly done.  emailJS is using new starter template, need to change to req form to work and remove todays date from modal and remove requesting manager.

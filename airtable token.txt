@@ -1,0 +1,11 @@
+airtable token:
+
+pathlZBPR0j4BULEk.6690b0d15be652f21f7097302c4ec4cdbd3f765dd68e8f14a734b7f687c5c87f
+
+baseId :
+
+appFgKdBEAupaPDJ5
+
+tableName:
+
+tbl1MpLdQKzdhzXqe
