@@ -32,7 +32,10 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     });
-
+    function toggleMenu() {
+        const sideNav = document.getElementById("sideNav");
+        sideNav.classList.toggle("open");
+    }
     document
         .getElementById("contactForm")
         .addEventListener("submit", async function (event) {
@@ -48,8 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 smartphoneModel: "",
                 smartphoneAssetId: "",
                 requestingManager: document.getElementById("manager").value,
-                requiredByDate: document.getElementById("requiredByDate").value,
-             
+                requiredByDate: document.getElementById("requiredByDate").value
             };
 
             switch (formData.jobTitle) {
@@ -178,9 +180,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 "Laptop Model": formData.laptopModel,
                 "Laptop Asset ID": formData.laptopAssetId,
                 "Smartphone Model": formData.smartphoneModel,
-                "Smartphone Asset ID": formData.smartphoneAssetId,
-               
-              
+                "Smartphone Asset ID": formData.smartphoneAssetId
             }
         });
 
@@ -214,18 +214,18 @@ document.addEventListener("DOMContentLoaded", function () {
         const templateId = "template_u2vx44l";
 
         const emailData = {
-        name: formData.Name,
-        email: formData.email,
-        area: formData.area,
-        jobTitle: formData.jobTitle,
-        manager: formData.requestingManager,
-        requiredByDate: formData.requiredByDate,
-        laptop_model: formData.laptopModel,
-        laptop_asset_id: formData.laptopAssetId,
-        smartphone_model: formData.smartphoneModel,
-        smartphone_asset_id: formData.smartphoneAssetId,
-        notes: formData.reason
-    };  
+            name: formData.Name,
+            email: formData.email,
+            area: formData.area,
+            jobTitle: formData.jobTitle,
+            manager: formData.requestingManager,
+            requiredByDate: formData.requiredByDate,
+            laptop_model: formData.laptopModel,
+            laptop_asset_id: formData.laptopAssetId,
+            smartphone_model: formData.smartphoneModel,
+            smartphone_asset_id: formData.smartphoneAssetId,
+            notes: formData.reason
+        };
 
         emailjs.send(serviceId, templateId, emailData).then(
             function (response) {

@@ -29,6 +29,32 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
+     // Mapping of links to their corresponding HTML pages
+    const navLinks = {
+        Home: "homepage.html",
+        "Data Export": "data_export.html",
+        "Requistion Form": "eForm.html",
+        "New Employee": "new_user.html",
+          "Create Admin": "adminUser.html",
+        "Connection Test": "connection_test.html",
+        Contact: "contact.html",
+         "Delete User": "delete_user.html",
+        "Log Out": "index.html",
+        "Employee List": "web_app.html"
+    };
+    
+     // Add event listeners to each nav link
+    document.querySelectorAll(".main-nav ul li a").forEach((link) => {
+        link.addEventListener("click", (event) => {
+            event.preventDefault(); // Prevent the default anchor click behavior
+            const page = navLinks[link.textContent.trim()]; // Get the corresponding page
+            if (page) {
+                window.location.href = page; // Navigate to the corresponding page
+            }
+        });
+    });
+
+    
     function showModal(message) {
         var modal = document.getElementById("myModal");
         var closeModalElements = document.getElementsByClassName("close")[0];
