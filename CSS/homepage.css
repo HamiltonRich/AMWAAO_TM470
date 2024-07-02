@@ -1,356 +1,176 @@
-/* Common styles */
+/* homepage.css */
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css");
+
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
-  line-height: 1.6;
-  background-color: #f5f5f5;
-  color: #333;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+    background-color: #f5f7fa;
+    color: #333;
+    font-size: 16px;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin-bottom: 60px; /* Ensure space above the footer */
 }
 
 .header {
-  background-color: #2c3e50;
-  padding: 20px 0;
-  color: #fff;
+    color: slategray;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
 }
 
 .header-title {
-  font-size: 32px;
+    font-size: 1.8em;
+    font-weight: 700;
 }
 
-.main-nav {
-  margin-top: 20px;
+.sidebar {
+    width: 43px;
+    background-color: slategrey;
+    color: white;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    padding-top: 80px;
+    align-items: center; /* Center items horizontally */
 }
 
-.main-nav ul {
-  list-style: none;
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
 }
 
-.main-nav ul li {
-  display: inline-block;
-  margin-right: 20px;
+.sidebar ul li {
+    width: 100%;
+    position: relative;
 }
 
-.main-nav ul li a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s ease;
+.sidebar ul li a {
+    display: flex;
+    flex-direction: column; /* Align icon and text vertically */
+    align-items: center; /* Center items horizontally */
+    padding: 20px 0;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    position: relative; /* Position for the tooltip */
 }
 
-.main-nav ul li a:hover {
-  color: #f39c12;
+.sidebar ul li a:hover,
+.sidebar ul li a:focus {
+    background-color: darkslategray;
 }
 
-/* Contact form styles */
-.form-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.sidebar ul li a .icon {
+    font-size: 1.2em;
+    margin-bottom: 5px; /* Space between icon and text */
 }
 
-.left-container,
-.right-contai ner {
-  flex: 1;
+.sidebar ul li a .text {
+    display: none; /* Hide the text */
 }
 
-.left-inner-container,
-.right-inner-container {
-  padding: 94px;
+.sidebar ul li a:hover .text {
+    display: block;
+    position: absolute;
+    left: 50px; /* Position to the right of the sidebar */
+    background-color: black;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    z-index: 1;
+    transition: opacity 0.3s;
+    opacity: 1; /* Show the tooltip */
 }
 
-form {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-p {
-  font-size: 16px;
-  color: #666;
-}
-
-.social-container {
-  margin-bottom: 20px;
-}
-
-.social {
-  margin-right: 10px;
-  color: #333;
-  text-decoration: none;
-  font-size: 20px;
-}
-
-.social:hover {
-  color: #f39c12;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="phone"],
-textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-textarea {
-  resize: vertical;
-}
-
-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #2c3e50;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #34495e;
-}
-
-
-/* Footer Styles */
-.footer {
-  background-color: #2c3e50;
-  color: #fff;
-  padding: 20px 0;
-  text-align: center;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
+.sidebar ul li a .text::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -5px; /* Position the triangle arrow */
+    transform: translateY(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent black transparent transparent; /* Arrow color */
 }
 
 .tiles-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* 2 columns */
-  gap: 20px; /* Space between the tiles */
-  margin-top: 34px;
-  padding: 0 17px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-left: 60px; /* Adjust margin to accommodate the sidebar */
+    padding: 69px;
 }
 
 .tile {
-  height: 143px;
-  background-color: #2c3e50;
-  color: #fff;
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    background: white;
+    width: calc(33% - 40px);
+    margin: 25px;
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex; /* Enable flexbox */
+    flex-direction: column; /* Ensure content is in a column layout */
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+    height: 200px; /* Set a fixed height for the tiles */
 }
 
+.tile h2 {
+    font-size: 1.5em;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
 .tile:hover {
-  background-color: #34495e;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* User list styles */
-.user-list {
-  list-style: none;
-  margin-top: 20px;
+.tile h2 {
+    font-size: 1.5em;
+    font-weight: 700;
+    margin-bottom: 10px;
 }
 
-.user-list li {
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  padding: 15px;
-  margin-bottom: 15px;
-  transition: box-shadow 0.3s ease;
-}
-
-.user-list li:hover {
-  background-color: #f5f5f5; /* Change the background color on hover */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.user-list li h2 {
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-
-.user-list li p {
-  font-size: 16px;
-  color: #666;
-}
-
-.user-list li a {
-  color: #2c3e50;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.user-list li a:hover {
-  color: #f39c12;
-}
-
-.selected {
-  background-color: #f0f0f0; /* Change this to the desired highlight color */
-}
-
-/* Style for the buttons container */
-.select-options {
-  display: flex;
-  align-items: center;
-}
-
-/* Style for the Select All button */
-.select-options button#selectAllButton {
-  background-color: #2c3e50;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 5px;
-  margin-right: 10px; /* Adjust margin as needed */
-}
-
-/* Style for the Export as CSV button */
-.select-options button#exportCSV {
-  background-color: #28a745;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.user-item.selected {
-  background-color: #f0f0f0; /* Change background color */
-  color: #333; /* Change text color */
-  border: 1px solid #999; /* Add a border */
-}
-
-.user-list .user-item.selected {
-  background-color: #f0f0f0; /* Change to your desired color */
-  /* You can also adjust other styles like text color, border, etc. */
-}
-
-.asset-details {
-  background-color: #fff;
-  padding: 23px;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin-top: 20px;
-  width: 65%; /* Percentage width */
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.user-item {
-  padding: 10px;
-  cursor: pointer;
-  border: 1px solid #ddd;
-  margin: 5px 0;
-}
-
-.user-item:hover {
-  background-color: #f0f0f0;
-}
-
-.selected {
-  background-color: #d3d3d3; /* Highlight selected items */
-}
-
-.asset-details h2 {
-  font-size: 24px;
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-.asset-details p {
-  font-size: 16px;
-  color: #666;
-  margin-bottom: 10px;
-}
-
-.asset-details label {
-  font-size: 14px;
-  font-weight: 500;
-  color: #333;
-  display: block;
-  margin-top: 10px;
-}
-
-.asset-details input {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-}
-
-.button-container {
-  margin-top: 20px;
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-}
-
-.button-container button {
-  padding: 10px 20px;
-  background-color: #2c3e50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.button-container button:hover {
-  background-color: #34495e;
-}
-/* Additional styles for the red container */
-.alpha-message {
-    background-color: #ff6b6b; /* Red background color */
-    color: #fff; /* White text color */
-   
-    text-align: center; /* Center-align the text */
-    max-width: 100%; /* Set maximum width for the container */
-   
-    
-}
-
-.alpha-message p {
-    margin: 0; /* Remove default margin for the paragraph */
+.footer {
+    background-color: slategray;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 999; /* Ensure footer stays above other content */
 }
 
 .footer p {
-  margin: 0;
-  font-size: 14px;
+    margin: 0;
 }
 
 .footer a {
-  color: #fff;
-  text-decoration: none;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 .footer a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }

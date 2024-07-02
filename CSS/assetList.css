@@ -1,13 +1,13 @@
 /* assetList.css */
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css");
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 body {
@@ -24,7 +24,7 @@ body {
     background-color: red;
     border-left: 4px solid #ffd700;
     padding: 0px 297px;
-    
+
     font-weight: 500;
     color: white;
 }
@@ -44,7 +44,7 @@ body {
 
 .sidebar {
     width: 43px;
-    background-color: #333;
+    background-color: slategrey;
     color: white;
     height: 100vh;
     position: fixed;
@@ -76,12 +76,14 @@ body {
     color: white;
     text-decoration: none;
     font-weight: 500;
-    transition: background-color 0.3s, padding 0.3s;
+    transition:
+        background-color 0.3s,
+        padding 0.3s;
 }
 
 .sidebar ul li a:hover,
 .sidebar ul li a:focus {
-    background-color: #575757;
+    background-color: darkslategray;
 }
 
 .sidebar ul li a .icon {
@@ -108,7 +110,8 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex: 0;    padding: 18px;
+    flex: 0;
+    padding: 18px;
     margin-left: 72px; /* Adjust margin to accommodate the sidebar */
 }
 
@@ -129,7 +132,9 @@ body {
     width: calc(50% - 40px);
     text-align: center;
     cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition:
+        transform 0.3s,
+        box-shadow 0.3s;
 }
 
 .tile:hover {
@@ -142,7 +147,7 @@ body {
     font-weight: 500;
 }
 .footer {
-    background-color: #333;
+    background-color: slategray;
     color: #fff;
     text-align: center;
     padding: 10px;
@@ -195,7 +200,27 @@ body {
     font-size: 1.2em;
     color: #555;
 }
+#export-button {
+    background-color: slategray;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
 
+#export-button:hover {
+    background-color: #45a049;
+}
+
+#export-button:active {
+    background-color: #3e8e41;
+}
 .close {
     color: #aaa;
     float: right;

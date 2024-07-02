@@ -1,127 +1,209 @@
-/* eForm.css */
+/* Import Google Fonts and Font Awesome */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css");
 
-/* Import Google Font */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f7f9fc;
+/* Global reset and default styling */
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+/* Body styling */
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: #f5f7fa;
     color: #333;
+    font-size: 16px;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
 }
 
-.alpha-message {
-    background-color: #f8d7da;
-    color: #721c24;
-    text-align: center;
-    padding: 10px;
-    margin-bottom: 20px;
-}
-
+/* Header styling */
 .header {
-    background-color: #4a90e2;
-    padding: 23px 0;
-    color: #4a90e2;
+    background-color: #ffffff;
+    color: slategray;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
-    border-radius: 0 0 0px 0px;
 }
 
 .header-title {
-    margin: 0;
-    font-size: 2em;
+    font-size: 1.8em;
     font-weight: 700;
 }
 
-.main-nav ul {
-    list-style: none;
-    padding: 2px;
+/* Sidebar styling */
+.sidebar {
+    width: 60px;
+    background-color: slategrey;
+    color: white;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.sidebar ul li {
+    width: 100%;
+    position: relative;
+}
+
+.sidebar ul li a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    margin: 8px;
-}
-
-.main-nav ul li {
-    margin: 0 10px;
-}
-
-.main-nav ul li a {
-    color: #4a90e2;
+    padding: 20px 0;
+    color: white;
     text-decoration: none;
     font-weight: 500;
+    position: relative;
 }
 
-.main-nav ul li a:hover {
-    text-decoration: underline;
+.sidebar ul li a:hover,
+.sidebar ul li a:focus {
+    background-color: darkslategray;
 }
 
+.sidebar ul li a .icon {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+.sidebar ul li a .text {
+    display: none;
+}
+
+.sidebar ul li a:hover .text {
+    display: block;
+    position: absolute;
+    left: 60px;
+    background-color: black;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    z-index: 1;
+    transition: opacity 0.3s;
+    opacity: 1;
+}
+
+.sidebar ul li a .text::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -5px;
+    transform: translateY(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent black transparent transparent;
+}
+
+/* Main container styling */
+.container {
+    margin-left: 50px;
+    padding: 29px;
+}
+
+/* Heading styles */
 h2 {
     text-align: center;
-    color: #4a90e2;
-    font-size: 1.5em;
-    margin-top: 20px;
+    font-size: 2em;
+    color: slategray;
+    margin-bottom: 18px;
 }
 
-.container {
-    width: 90%;
+/* Form styling */
+form {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     max-width: 600px;
     margin: 0 auto;
-    background-color: white;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
 }
 
+/* Form group styling */
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 26px;
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Align items vertically */
 }
 
 .form-group label {
-    display: block;
-    margin-bottom: 5px;
+    flex: 1; /* Let the label take all available space */
     font-weight: 500;
-}
-
-.form-group input[type="text"],
-.form-group input[type="email"],
-.form-group input[type="date"],
-.form-group select,
-.form-group textarea {
-    width: 95%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1em;
+    margin-bottom: 13px;
 }
 
 .form-group input[type="checkbox"] {
-    margin-right: 10px;
+    flex-shrink: 0; /* Prevent checkbox from shrinking */
+    margin-right: 8px; /* Adjust spacing between checkbox and label */
+    align-self: flex-start; /* Align checkbox to the top */
+    transform: translateY(2px); /* Adjust vertical alignment if needed */
 }
 
-.form-group div {
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px;
+.form-group input[type="checkbox"] + label {
+    flex: 1; /* Allow the label to take the remaining space */
 }
 
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: calc(100% - 24px);
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 1em;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.form-group input[readonly],
+.form-group select[readonly] {
+    background-color: #f5f7fa;
+}
+
+/* Submit button styling */
 button[type="submit"] {
-    background-color: #4a90e2;
+    background-color: slategray;
     color: white;
     padding: 10px 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     font-size: 1em;
     cursor: pointer;
+    transition: background-color 0.3s;
+    display: block;
+    margin: 20px auto 0;
 }
 
 button[type="submit"]:hover {
-    background-color: #357ABD;
+    background-color: darkslategray;
 }
 
+/* Modal styles */
 .modal {
     display: none;
     position: fixed;
-    z-index: 1000;
+    z-index: 1;
     left: 0;
     top: 0;
     width: 100%;
@@ -131,33 +213,13 @@ button[type="submit"]:hover {
 }
 
 .modal-content {
-    background-color: white;
+    background-color: #fefefe;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
+    border-radius: 10px;
     max-width: 500px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.modal-content h2 {
-    color: #4a90e2;
-    margin-top: 0;
-}
-
-.modal-content label {
-    font-weight: 500;
-}
-
-.modal-content input[type="text"],
-.modal-content input[type="email"] {
-    width: 95%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1em;
 }
 
 .close {
@@ -169,30 +231,29 @@ button[type="submit"]:hover {
 
 .close:hover,
 .close:focus {
-    color: #000;
+    color: black;
     text-decoration: none;
     cursor: pointer;
 }
 
-.button-container {
-    text-align: center;
-    margin-top: 20px; /* Adjust margin as needed */
-}
-
-button#goToHomepageButton,
-button#modalSubmitButton {
-    background-color: #4a90e2;
+button[type="button"],
+button#modalSubmitButton,
+button#goToHomepageButton {
+    background-color: slategray;
     color: white;
     padding: 10px 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     font-size: 1em;
     cursor: pointer;
-    display: inline-block; /* Ensure buttons behave as blocks */
+    transition: background-color 0.3s;
+    display: block;
+    margin: 10px auto;
+    text-align: center;
 }
 
-
-button#goToHomepageButton:hover,
-button#modalSubmitButton:hover {
-    background-color: #357ABD;
+button[type="button"]:hover,
+button#modalSubmitButton:hover,
+button#goToHomepageButton:hover {
+    background-color: darkslategray;
 }

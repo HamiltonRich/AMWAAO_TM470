@@ -17,16 +17,19 @@
     </div>
     <header class="header">
         <h1 class="header-title">TeamAsset Manager</h1>
+        <h2 class="header">Asset Inventory</h2>
     </header>
     <div class="sidebar">
-        <ul>
-            <li><a href="#"><i class="fas fa-home icon"></i><span class="text">Home</span></a></li>
-            <li><a href="#"><i class="fas fa-file-alt icon"></i><span class="text">Requisition Form</span></a></li>
-            <li><a href="#"><i class="fas fa-users icon"></i><span class="text">Staff List</span></a></li>
-            <li><a href="#"><i class="fas fa-user-plus icon"></i><span class="text">New Starter</span></a></li>
-            <li><a href="#"><i class="fas fa-link icon"></i><span class="text">Connection Test</span></a></li>
-            <li><a href="#"><i class="fas fa-envelope icon"></i><span class="text">Contact</span></a></li>
-            <li><a href="#"><i class="fas fa-sign-out-alt icon"></i><span class="text">Log Out</span></a></li>
+         <ul>
+            <li><a href="#" class="nav-link" data-target="home"><i class="fas fa-home icon"></i><span class="text">Home</span></a></li>
+            <li><a href="#" class="nav-link" data-target="requisition-form"><i class="fas fa-file-alt icon"></i><span class="text">Requisition Form</span></a></li>
+             <li><a href="#" class="nav-link" data-target="requisition-form"><i class="fas fa-archive"></i><span class="text">Asset Inventory</span></a></li>
+            <li><a href="#" class="nav-link" data-target="staff-list"><i class="fas fa-users icon"></i><span class="text">Staff List</span></a></li>
+            <li><a href="#" class="nav-link" data-target="new-starter"><i class="fas fa-user-plus icon"></i><span class="text">New Starter</span></a></li>
+            <li><a href="#" class="nav-link" data-target="delete_user"><i class="fas fa-user-slash"></i><span class="text">Delete User</span></a></li>
+            <li><a href="#" class="nav-link" data-target="connection-test"><i class="fas fa-network-wired"></i><span class="text">Connection Test</span></a></li>
+            <li><a href="#" class="nav-link" data-target="contact"><i class="fas fa-envelope icon"></i><span class="text">Contact</span></a></li>
+            <li><a href="#" class="nav-link" data-target="logout"><i class="fas fa-sign-out-alt icon"></i><span class="text">Log Out</span></a></li>
         </ul>
     </div>
     <div class="main-content">
@@ -47,7 +50,7 @@
     </div>
     <footer class="footer">
         <p>
-             TeamAsset Manager &copy; 2024. All rights reserved. |
+            TeamAsset Manager &copy; 2024. All rights reserved. |
             Designed by
             <a href="https://www.linkedin.com/in/richard-hamilton-319b35287">R I Hamilton</a>
         </p>
@@ -57,6 +60,7 @@
             <span class="close">&times;</span>
             <h2 id="modal-title"></h2>
             <p id="modal-body"></p>
+            <button id="export-button">Export to CSV</button>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/airtable-browser/dist/airtable.browser.min.js"></script>

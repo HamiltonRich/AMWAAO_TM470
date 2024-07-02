@@ -1,201 +1,253 @@
-/* Common styles */
+/* web_app.css */
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css");
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: "Roboto", sans-serif;
 }
 
 body {
-    font-family: "Poppins", sans-serif;
-    line-height: 1.6;
-    background-color: #f5f5f5;
+    background-color: #f5f7fa;
     color: #333;
+    font-size: 16px;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin-bottom: 60px; /* Ensure space above the footer */
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+.alpha-message {
+    background-color: red;
+    border-left: 4px solid #ffd700;
+    padding: 0px 297px;
+    font-weight: 500;
+    color: white;
 }
 
 .header {
-    background-color: #2c3e50;
-    padding: 20px 0;
-    color: #fff;
+    color: slategray;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
 }
 
 .header-title {
-    font-size: 32px;
+    font-size: 1.8em;
+    font-weight: 700;
 }
 
-.main-nav ul {
+.sidebar {
+    width: 43px;
+    background-color: slategrey;
+    color: white;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    padding-top: 80px;
+    align-items: center; /* Center items horizontally */
+}
+
+.sidebar ul {
     list-style: none;
-    margin-top: 20px;
+    padding: 0;
+    width: 100%;
 }
 
-.main-nav ul li {
-    display: inline-block;
-    margin-right: 20px;
+.sidebar ul li {
+    width: 100%;
+    position: relative;
 }
 
-.main-nav ul li a {
-    color: #fff;
+.sidebar ul li a {
+    display: flex;
+    flex-direction: column; /* Align icon and text vertically */
+    align-items: center; /* Center items horizontally */
+    padding: 20px 0;
+    color: white;
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.3s ease;
+    position: relative; /* Position for the tooltip */
 }
 
-.main-nav ul li a:hover {
-    color: #f39c12;
+.sidebar ul li a:hover,
+.sidebar ul li a:focus {
+    background-color: darkslategray;
 }
 
-/* Footer Styles */
+.sidebar ul li a .icon {
+    font-size: 1.2em;
+    margin-bottom: 5px; /* Space between icon and text */
+}
+
+.sidebar ul li a .text {
+    display: none; /* Hide the text */
+}
+
+.sidebar ul li a:hover .text {
+    display: block;
+    position: absolute;
+    left: 50px; /* Position to the right of the sidebar */
+    background-color: black;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    z-index: 1;
+    transition: opacity 0.3s;
+    opacity: 1; /* Show the tooltip */
+}
+
+.sidebar ul li a .text::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -5px; /* Position the triangle arrow */
+    transform: translateY(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent black transparent transparent; /* Arrow color */
+}
+
+.container {
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    padding: 15px;
+    margin-left: 60px; /* Adjust margin to accommodate the sidebar */
+}
+
+.search-container {
+    width: 100%; /* Occupy full width of container */
+    margin-bottom: 20px;
+    margin-top: 20px; /* Ensure it is placed under the header */
+}
+
+.search-input {
+    width: 80%; /* Set the search input width to 80% of search-container */
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    box-sizing: border-box; /* Ensure padding is included in the width calculation */
+}
+
+.user-list li {
+    list-style: none;
+    width: 80%; /* Set each user list item width to 80% of container */
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.user-list li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-info {
+    width: 100%;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 20px;
+    display: none;
+}
+
 .footer {
-    background-color: #2c3e50;
+    background-color: slategray;
     color: #fff;
-    padding: 20px 0;
     text-align: center;
+    padding: 10px;
     position: fixed;
     bottom: 0;
     width: 100%;
+    z-index: 999; /* Ensure footer stays above other content */
 }
 
 .footer p {
     margin: 0;
-    font-size: 14px;
 }
 
 .footer a {
     color: #fff;
     text-decoration: none;
+    font-weight: bold;
 }
 
 .footer a:hover {
     text-decoration: underline;
 }
 
-/* Alpha message */
-.alpha-message {
-    background-color: #ff6b6b;
-    color: #fff;
-    text-align: center;
-    max-width: 100%;
-}
-
-.alpha-message p {
-    margin: 0;
-}
-
-/* Search User Section */
-.search-container {
-    margin-top: 20px;
-}
-
-.search-input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-/* User list styles */
-.user-list {
-    list-style: none;
-    margin-top: 20px;
-}
-
-.user-list li {
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    margin-bottom: 15px;
-    transition: box-shadow 0.3s ease;
-}
-
-.user-list li:hover {
-    background-color: #f5f5f5;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.user-list li h2 {
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
-.user-list li p {
-    font-size: 16px;
-    color: #666;
-}
-
-.user-list li a {
-    color: #2c3e50;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-.user-list li a:hover {
-    color: #f39c12;
-}
-
-.selected {
-    background-color: #f0f0f0;
-}
-
-/* Modal styles */
 .modal {
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
-   animation:unfoldIn 1s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
-}
-
-@keyframes unfoldIn {
-  0% {
-    transform:scaleY(.005) scaleX(0);
-  }
-  50% {
-    transform:scaleY(.005) scaleX(1);
-  }
-  100% {
-    transform:scaleY(1) scaleX(1);
-  
-    }
 }
 
 .modal-content {
-    background-color: #fefefe;
-    margin: 5% auto;
+    background-color: white;
+    margin: 10% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
-    max-width: 600px;
-    border-radius: 10px;
-    animation: contentFadeIn 0.5s ease-in;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
-@keyframes contentFadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+.modal-content h2 {
+    font-size: 1.8em;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.modal-content p {
+    font-size: 1.2em;
+    color: #555;
+}
+
+#userTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#userTable th, #userTable td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
 }
 
 .close {
     color: #aaa;
     float: right;
     font-size: 28px;
-    font-weight: bold;
+    font-weight: 700;
+    cursor: pointer;
+    transition: color 0.3s;
 }
 
 .close:hover,
@@ -203,25 +255,4 @@ body {
     color: black;
     text-decoration: none;
     cursor: pointer;
-}
-
-/* Table styles within modal */
-#userTable {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-#userTable td, #userTable th {
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: left;
-}
-
-#userTable th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-}
-
-#userTable td:first-child {
-    font-weight: bold;
 }

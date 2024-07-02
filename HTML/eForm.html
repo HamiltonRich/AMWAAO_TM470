@@ -1,50 +1,38 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Asset Req. Form</title>
-        <link rel="stylesheet" href="../CSS/eForm.css" />
-        <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
-            rel="stylesheet" />
-    </head>
-    <body>
-        <div class="alpha-message">
-            <p>
-                **This app is in alpha testing and may/will not work or look as
-                expected, soz**
-            </p>
-        </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asset Management System</title>
+    <link rel="stylesheet" href="../CSS/eForm.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Additional styles can be added here if needed */
+    </style>
+</head>
+<body>
+   
     <header class="header">
-    <div class="container">
-        <h1 class="header-title">Asset Management System</h1>
-        <div class="menu-toggle" onclick="toggleMenu()">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </div>
-    </div>
-</header>
-<div class="side-nav" id="sideNav">
-    <nav class="main-nav">
-        <ul>
-            <li><a href="#">Home</a></li>
-          
-            <li><a href="#">Employee List</a></li>
-            <li><a href="#">New Employee</a></li>
-           
-            <li><a href="#">Connection Test</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Log Out</a></li>
+        <h1 class="header-title">TeamAsset Manager</h1>
+    
+    </header>
+    <div class="sidebar">
+         <ul>
+            <li><a href="#" class="nav-link" data-target="home"><i class="fas fa-home icon"></i><span class="text">Home</span></a></li>
+            <li><a href="#" class="nav-link" data-target="requisition-form"><i class="fas fa-file-alt icon"></i><span class="text">Requisition Form</span></a></li>
+             <li><a href="#" class="nav-link" data-target="requisition-form"><i class="fas fa-archive"></i><span class="text">Asset Inventory</span></a></li>
+            <li><a href="#" class="nav-link" data-target="staff-list"><i class="fas fa-users icon"></i><span class="text">Staff List</span></a></li>
+            <li><a href="#" class="nav-link" data-target="new-starter"><i class="fas fa-user-plus icon"></i><span class="text">New Starter</span></a></li>
+            <li><a href="#" class="nav-link" data-target="delete_user"><i class="fas fa-user-slash"></i><span class="text">Delete User</span></a></li>
+            <li><a href="#" class="nav-link" data-target="connection-test"><i class="fas fa-network-wired"></i><span class="text">Connection Test</span></a></li>
+            <li><a href="#" class="nav-link" data-target="contact"><i class="fas fa-envelope icon"></i><span class="text">Contact</span></a></li>
+            <li><a href="#" class="nav-link" data-target="logout"><i class="fas fa-sign-out-alt icon"></i><span class="text">Log Out</span></a></li>
         </ul>
-    </nav>
-</div>
+    </div>
+
      
-        <h2>Replacement Equipment Request</h2>
+      
         <div class="container">
             <form id="contactForm">
                 <div class="form-group">
