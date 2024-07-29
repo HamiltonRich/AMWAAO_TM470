@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const navLinks = {
         home: "assetList.html",
         "requisition-form": "eForm.html",
-      ,
+      
         "staff-list": "web_app.html",
         "new-starter": "new_user.html",
         delete_user: "delete_user.html",
