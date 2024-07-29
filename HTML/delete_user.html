@@ -3,82 +3,169 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Delete User</title>
-    <link rel="stylesheet" href="../CSS/delete_user.css" />
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
-        rel="stylesheet" />
+    <title>Asset Management System</title>
+    <link rel="stylesheet" href="../CSS/styles.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
+    <style>
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        form {
+            padding: 20px;
+            margin-top: 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 900px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 20px;
+            background-color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease-in-out;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        input[type="email"],
+        input[type="tel"],
+        input[type="text"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: #f9f9f9;
+            transition: all 0.3s ease-in-out;
+        }
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        input[type="text"]:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #00796b;
+            box-shadow: 0 0 5px rgba(0, 121, 107, 0.3);
+            outline: none;
+        }
+        textarea {
+            grid-column: span 2;
+            resize: vertical;
+        }
+        button[type="submit"] {
+            color: #fff;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            width: 100%;
+            grid-column: span 2;
+            background-color: slategray;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+        button[type="submit"]:hover {
+            background-color: darkslategray;
+        }
+        @media (max-width: 768px) {
+            form {
+                grid-template-columns: 1fr;
+            }
+            textarea,
+            button[type="submit"] {
+                grid-column: span 1;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="alpha-message">
-        <p>**This app is in alpha testing and may not work as expected**</p>
-    </div>
     <header class="header">
-        <div class="container">
-            <h1 class="header-title">Asset Management System</h1>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="#">Home</a></li>
-                 
-                    <li><a href="#">Staff List</a></li>
-                    <li><a href="#">Connection Test</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Log Out</a></li>
-                </ul>
-            </nav>
-        </div>
+        <h1 class="header-title">TeamAsset Manager</h1>
+        <button id="darkModeToggle" title="Light/Dark mode"><i id="darkModeIcon" class="fas fa-moon"></i></button>
+        <h2 class="header">
+          Remove User
+            <span class="info-icon-container">
+                <span class="info-icon">i
+                    <span class="tooltip">Remove a user from the database. This will remove the user and put the equipment back into the spare stock.</span>
+                </span>
+            </span>
+        </h2>
     </header>
-    <h2>Delete User</h2>
-    <div class="container">
-            <form id="contactForm">
+    <header>
+        <div id="loggedIn"></div>
+        <div id="userDetails"></div>
+    </header>
+    <div class="sidebar">
+        <ul>
+            <li>
+                <a href="#" class="nav-link" data-target="home"><i class="fas fa-home icon"></i><span class="text">Home</span></a>
+            </li>
+            <li>
+                <a href="#" class="nav-link" data-target="requisition-form"><i class="fas fa-file-alt icon"></i><span class="text">Report a Fault</span></a>
+            </li>
+            <li>
+                <a href="#" class="nav-link" data-target="staff-list"><i class="fas fa-users icon"></i><span class="text">Asset Register</span></a>
+            </li>
+            <li>
+                <a href="#" class="nav-link" data-target="new-starter"><i class="fas fa-user-plus icon"></i><span class="text">New User</span></a>
+            </li>
+            <li>
+                <a href="#" class="nav-link" data-target="delete_user"><i class="fas fa-user-slash icon"></i><span class="text">Remove User</span></a>
+            </li>
+            <li>
+                <a href="#" class="nav-link" data-target="connection-test"><i class="fas fa-network-wired icon"></i><span class="text">Connection Test</span></a>
+            </li>
+            <li>
+                <a href="#" class="nav-link" data-target="contact"><i class="fas fa-envelope icon"></i><span class="text">Contact Us</span></a>
+            </li>
+            <li>
+                <a href="#" class="nav-link" data-target="about"><i class="fas fa-info-circle icon"></i><span class="text">About</span></a>
+            </li>
+            <li>
+                <a href="#" class="nav-link" data-target="logout"><i class="fas fa-sign-out-alt icon"></i><span class="text">Log Out</span></a>
+            </li>
+        </ul>
+    </div>
+
+    <main class="container">
+        <form id="contactForm">
             <div class="form-group">
                 <label for="Name">Name:</label>
-                <input
-                    type="text"
-                    id="Name"
-                    name="Name"
-                    required />
+                <input type="text" id="Name" name="Name" required />
             </div>
-            
             <div class="form-group">
-                <label for="email">UPN/ Email:</label>
+                <label for="email">UPN/Email:</label>
                 <input type="email" id="email" name="email" readonly />
             </div>
             <div class="form-group">
                 <label for="todaysDate">Leave Date:</label>
-                <input
-                    type="date"
-                    id="todaysDate"
-                    name="todaysDate"
-                    class="flatpickr-input"
-                    data-input
-                    required />
+                <input type="date" id="todaysDate" name="todaysDate" class="flatpickr-input" data-input required />
             </div>
             <div class="form-group">
                 <label for="notes">Reason for deletion:</label>
-                <textarea
-                    id="notes"
-                    name="notes"
-                    rows="4"
-                    required></textarea>
+                <textarea id="notes" name="notes" rows="4" required></textarea>
             </div>
-           
             <input type="hidden" id="laptopModel" name="laptopModel" />
             <input type="hidden" id="laptopAssetId" name="laptopAssetId" />
-            <input
-                type="hidden"
-                id="smartphoneModel"
-                name="smartphoneModel" />
-            <input
-                type="hidden"
-                id="smartphoneAssetId"
-                name="smartphoneAssetId" />
+            <input type="hidden" id="smartphoneModel" name="smartphoneModel" />
+            <input type="hidden" id="smartphoneAssetId" name="smartphoneAssetId" />
             <button type="submit">Submit</button>
         </form>
-    </div>
+    </main>
+
     <!-- First Modal Structure -->
     <div id="userModal" class="modal">
         <div class="modal-content">
@@ -89,8 +176,8 @@
                     <!-- User details will be populated here -->
                 </tbody>
             </table>
-            <p>By pressing confirm, you confirm you are in possession of the listed equipment.</p>
-            <button id="confirmButton">Confirm</button>
+            <p>By pressing confirm, the user will be removed and the stock will be listed as spare.</p>
+            <button id="modalSubmitButton">Confirm</button>
         </div>
     </div>
 
@@ -101,16 +188,18 @@
             <button id="homeButton">Homepage</button>
         </div>
     </div>
+
     <footer class="footer">
-            <p>
-                &copy; 2024 Asset Management System. All rights reserved. |
-                Designed by
-                <a href="https://www.linkedin.com/in/richard-hamilton-319b35287"
-                    >R I Hamilton</a
-                >
-            </p>
-        </footer>
+        <p>
+            &copy; 2024 Asset Management System. All rights reserved. | Designed by
+            <a href="https://www.linkedin.com/in/richard-hamilton-319b35287">R I Hamilton</a>
+        </p>
+    </footer>
+
+    <script src="../JavaScript/darkMode.js"></script>
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script src="../JavaScript/delete_user.js"></script>
+    <script src="../JavaScript/navLinks.js"></script>
+    <script src="../JavaScript/tooltip.js"></script>
 </body>
 </html>

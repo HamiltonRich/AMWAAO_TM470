@@ -1,47 +1,182 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const apiKey =
-        "pathlZBPR0j4BULEk.6690b0d15be652f21f7097302c4ec4cdbd3f765dd68e8f14a734b7f687c5c87f";
+document.addEventListener("DOMContentLoaded", function () {
+    const apiKey = "pathlZBPR0j4BULEk.6690b0d15be652f21f7097302c4ec4cdbd3f765dd68e8f14a734b7f687c5c87f";
     const baseId = "appFgKdBEAupaPDJ5";
-    const tableId = "tbl1MpLdQKzdhzXqe";
+    const tableName = "tbl1MpLdQKzdhzXqe";
+    let usersData = [];
+    let chart;
 
-    // Get the modal
-    const modal = document.getElementById("myModal");
-    const modalTitle = document.getElementById("modal-title");
-    const modalBody = document.getElementById("modal-body");
-    const exportButton = document.getElementById("export-button");
+    async function fetchAPIData() {
+        const maxRecords = 100; // Airtable limits maxRecords to 100 per request
+        let offset = "";
 
-    // Get the <span> element that closes the modal
-    const span = document.getElementsByClassName("close")[0];
-
-    let fetchedData = [];
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function () {
-        modal.style.display = "none";
-    };
-
-    // Mapping of links to their corresponding HTML pages
-    const navLinks = {
-        Home: "homepage.html",
-        "Asset Inventory": "assetList.html.html",
-        "Requistion Form": "eForm.html",
-        "New Employee": "new_user.html",
-        "Delete User": "delete_user.html",
-        "Connection Test": "connection_test.html",
-        Contact: "contact.html",
-        "Log Out": "index.html",
-        "Staff List": "web_app.html"
-        
-    };
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
+        while (true) {
+            const url = `https://api.airtable.com/v0/${baseId}/${tableName}?pageSize=${maxRecords}&offset=${offset}`;
+            try {
+                const response = await fetch(url, {
+                    headers: { Authorization: `Bearer ${apiKey}` }
+                });
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.json();
+                console.log("Fetched data:", data); // Debugging line to check fetched data
+                usersData.push(...data.records.map(record => record.fields));
+                if (!data.offset) {
+                    break;
+                }
+                offset = data.offset;
+            } catch (error) {
+                console.error("Error fetching API data:", error);
+                return;
+            }
         }
-    };
+        console.log("Complete data:", usersData); // Debugging line to check complete data
+        renderChart(usersData);
+    }
+
+    function renderChart(users) {
+        if (!users.length) {
+            console.error("No user data to render chart");
+            return;
+        }
+
+        // Destroy previous chart instance if it exists
+        if (chart) {
+            chart.destroy();
+        }
+
+        // Group data by model and status for laptops and smartphones
+        const laptopModels = {};
+        const smartphoneModels = {};
+
+        users.forEach(user => {
+            if (user["Laptop Model"]) {
+                const model = user["Laptop Model"];
+                const status = user["Laptop Status"];
+                if (!laptopModels[model]) {
+                    laptopModels[model] = { assigned: 0, spare: 0, broken: 0 };
+                }
+                if (status === "Assigned") {
+                    laptopModels[model].assigned += 1;
+                } else if (status === "Spare") {
+                    laptopModels[model].spare += 1;
+                } else if (status === "Broken") {
+                    laptopModels[model].broken += 1;
+                }
+            }
+            if (user["Smartphone Model"]) {
+                const model = user["Smartphone Model"];
+                const status = user["Smartphone Status"];
+                if (!smartphoneModels[model]) {
+                    smartphoneModels[model] = { assigned: 0, spare: 0, broken: 0 };
+                }
+                if (status === "Assigned") {
+                    smartphoneModels[model].assigned += 1;
+                } else if (status === "Spare") {
+                    smartphoneModels[model].spare += 1;
+                } else if (status === "Broken") {
+                    smartphoneModels[model].broken += 1;
+                }
+            }
+        });
+
+        console.log("Laptop Models:", laptopModels);
+        console.log("Smartphone Models:", smartphoneModels);
+
+        // Prepare data for Chart.js
+        const laptopLabels = Object.keys(laptopModels);
+        const laptopAssignedData = laptopLabels.map(model => laptopModels[model].assigned);
+        const laptopSpareData = laptopLabels.map(model => laptopModels[model].spare);
+        const laptopBrokenData = laptopLabels.map(model => laptopModels[model].broken);
+
+        const smartphoneLabels = Object.keys(smartphoneModels);
+        const smartphoneAssignedData = smartphoneLabels.map(model => smartphoneModels[model].assigned);
+        const smartphoneSpareData = smartphoneLabels.map(model => smartphoneModels[model].spare);
+        const smartphoneBrokenData = smartphoneLabels.map(model => smartphoneModels[model].broken);
+
+        const ctx = document.getElementById('assetChart').getContext('2d');
+        chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [...laptopLabels, ...smartphoneLabels],
+                datasets: [
+                    {
+                        label: 'Operational Laptops',
+                        data: [...laptopAssignedData, ...Array(smartphoneLabels.length).fill(0)],
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1,
+                        barThickness: 65, // Set explicit bar thickness
+                    },
+                    {
+                        label: 'Spare Laptops',
+                        data: [...laptopSpareData, ...Array(smartphoneLabels.length).fill(0)],
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1,
+                        barThickness: 65, // Set explicit bar thickness
+                    },
+                    {
+                        label: 'Broken Laptops',
+                        data: [...laptopBrokenData, ...Array(smartphoneLabels.length).fill(0)],
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1,
+                        barThickness: 65, // Set explicit bar thickness
+                    },
+                    {
+                        label: 'Operational Phones',
+                        data: [...Array(laptopLabels.length).fill(0), ...smartphoneAssignedData],
+                        backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                        borderColor: 'rgba(255, 206, 86, 1)',
+                        borderWidth: 1,
+                        barThickness: 65, // Set explicit bar thickness
+                    },
+                    {
+                        label: 'Spare Phones',
+                        data: [...Array(laptopLabels.length).fill(0), ...smartphoneSpareData],
+                        backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                        borderColor: 'rgba(153, 102, 255, 1)',
+                        borderWidth: 1,
+                        barThickness: 65, // Set explicit bar thickness
+                    },
+                    {
+                        label: 'Broken Phones',
+                        data: [...Array(laptopLabels.length).fill(0), ...smartphoneBrokenData],
+                        backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                        borderColor: 'rgba(255, 159, 64, 1)',
+                        borderWidth: 1,
+                        barThickness: 65, // Set explicit bar thickness
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        stacked: true, // Ensure bars are stacked
+                        offset: true, // Offset the bars
+                        categoryPercentage: 0.5, // Control the width of categories
+                        barPercentage: 0.7, // Control the width of bars within categories
+                        grid: {
+                            offset: true // Offset the grid lines
+                        }
+                    },
+                    y: { 
+                        beginAtZero: true,
+                        stacked: true, // Ensure y-axis stacking is enabled
+                        ticks: {
+                            stepSize: 10 // Ensure step size is 10
+                        }
+                    }
+                }
+            }
+        });
+    }
 
     function convertToCSV(data) {
+        if (data.length === 0) return '';
         const headers = Object.keys(data[0]).join(",");
         const rows = data.map((row) => Object.values(row).join(","));
         return `${headers}\n${rows.join("\n")}`;
@@ -58,133 +193,5 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.removeChild(downloadLink);
     }
 
-    exportButton.addEventListener("click", () => {
-        if (fetchedData.length > 0) {
-            const csv = convertToCSV(fetchedData);
-            const title = modalTitle.innerText.replace(/ /g, "_");
-            downloadCSV(csv, `${title}_data.csv`);
-        }
-    });
-
-    async function fetchAssets(assetType) {
-        let filterFormula;
-        let title;
-        let modelFieldName;
-        let idFieldName;
-        let nameFieldName;
-
-        switch (assetType) {
-            case "Operational Laptops":
-                filterFormula = "AND({Laptop Status} = 'Assigned')";
-                title = "Operational Laptops";
-                modelFieldName = "Laptop Model";
-                idFieldName = "Laptop Asset ID";
-                nameFieldName = "Name";
-                break;
-            case "Operational Phones":
-                filterFormula = "AND({Smartphone Status} = 'Assigned')";
-                title = "Operational Phones";
-                modelFieldName = "Smartphone Model";
-                idFieldName = "Smartphone Asset ID";
-                nameFieldName = "Name";
-                break;
-            case "Spare Laptops":
-                filterFormula = "AND({Laptop Status} = 'Spare')";
-                title = "Spare Laptops";
-                modelFieldName = "Laptop Model";
-                idFieldName = "Laptop Asset ID";
-                nameFieldName = "Name";
-                break;
-            case "Spare Phones":
-                filterFormula = "AND({Smartphone Status} = 'Spare')";
-                title = "Spare Phones";
-                modelFieldName = "Smartphone Model";
-                idFieldName = "Smartphone Asset ID";
-                nameFieldName = "Name";
-                break;
-            default:
-                return;
-        }
-
-        const url = `https://api.airtable.com/v0/${baseId}/${tableId}?filterByFormula=${encodeURIComponent(filterFormula)}`;
-
-        try {
-            console.log(`Fetching assets for: ${assetType}`);
-            let offset = "";
-            let modelCounts = {};
-            fetchedData = [];
-
-            do {
-                // Make API request with pagination offset
-                const response = await fetch(`${url}&offset=${offset}`, {
-                    headers: {
-                        Authorization: `Bearer ${apiKey}`
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-
-                const data = await response.json();
-                console.log("Data fetched successfully:", data);
-                const records = data.records;
-
-                // Process records and count model occurrences
-                records.forEach((record) => {
-                    const model = record.fields[modelFieldName];
-                    if (model) {
-                        modelCounts[model] = (modelCounts[model] || 0) + 1;
-                        fetchedData.push({
-                            [nameFieldName]: record.fields[nameFieldName],
-                            [modelFieldName]: model,
-                            [idFieldName]: record.fields[idFieldName]
-                        });
-                    }
-                });
-
-                // Update offset for next page of records
-                offset = data.offset;
-            } while (offset);
-
-            // Construct modal content with model breakdown
-            let modalBodyContent = "";
-            for (const [model, count] of Object.entries(modelCounts)) {
-                modalBodyContent += `${count} ${model}<br>`;
-            }
-
-            console.log("Modal content:", modalBodyContent);
-
-            // Update modal with content
-            modalTitle.innerText = title;
-            modalBody.innerHTML = modalBodyContent || "No assets found.";
-            modal.style.display = "block";
-        } catch (error) {
-            console.error(`Error fetching assets for ${assetType}:`, error);
-            modalTitle.innerText = "Error";
-            modalBody.innerText = `Failed to fetch assets for ${assetType}. Please try again later.`;
-            modal.style.display = "block";
-        }
-    }
-
-    // Add event listeners to the tiles
-    document.querySelectorAll(".tile").forEach((tile) => {
-        tile.addEventListener("click", () => {
-            const assetType = tile.dataset.type;
-            fetchAssets(assetType);
-        });
-    });
-
-    // Add event listeners to the sidebar links
-    document.querySelectorAll(".nav-link").forEach((link) => {
-        link.addEventListener("click", (event) => {
-            event.preventDefault();
-            const target = link.getAttribute("data-target");
-            if (navLinks[target]) {
-                window.location.href = navLinks[target];
-            } else {
-                console.error(`No URL found for target: ${target}`);
-            }
-        });
-    });
+    fetchAPIData();
 });

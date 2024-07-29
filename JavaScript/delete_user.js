@@ -9,33 +9,41 @@ document.addEventListener("DOMContentLoaded", function () {
     // Select the UPN input field
     const upnInput = document.getElementById("email");
 
-    // Event listener for changes in the Name field
-    nameInput.addEventListener("input", function () {
-        const nameValue = this.value.trim(); // Get the trimmed value of Name input
-
-        // Generate UPN based on Name value
-        const generatedUPN = generateUPN(nameValue);
-
-        // Update the UPN input field
-        upnInput.value = generatedUPN;
-    });
+    // Function to capitalize first letter of each part of the name
+    function capitalizeName(name) {
+        return name.replace(/\b\w/g, function (char) {
+            return char.toUpperCase();
+        });
+    }
 
     // Function to generate UPN from Name
     function generateUPN(name) {
-        // Replace spaces with dots and append domain suffix
         const domain = "@hamiltonsales.com";
         const upn = name.replace(/\s+/g, ".").toLowerCase() + domain;
         return upn;
     }
 
+    // Event listener for changes in the Name field
+    nameInput.addEventListener("blur", function () {
+        const nameValue = this.value.trim(); // Get the trimmed value of Name input
+        const capitalizedValue = capitalizeName(nameValue);
+        this.value = capitalizedValue; // Set the capitalized value back to the input
+
+        // Generate UPN based on Name value
+        const generatedUPN = generateUPN(capitalizedValue);
+
+        // Update the UPN input field
+        upnInput.value = generatedUPN;
+    });
+
     // Initialize Airtable API
-    const airtableApiKey =
-        "pathlZBPR0j4BULEk.6690b0d15be652f21f7097302c4ec4cdbd3f765dd68e8f14a734b7f687c5c87f";
+    const airtableApiKey = "pathlZBPR0j4BULEk.6690b0d15be652f21f7097302c4ec4cdbd3f765dd68e8f14a734b7f687c5c87f";
     const baseId = "appFgKdBEAupaPDJ5";
     const tableName = "tbl1MpLdQKzdhzXqe";
+    const assetsTableName = "tblAssetsTableName"; // Replace with your actual assets table name
 
-    async function fetchUserDetails(name, email) {
-        const url = `https://api.airtable.com/v0/${baseId}/${tableName}?filterByFormula=AND({Name}='${name}', {UPN}='${email}')`;
+    async function fetchUserDetails(email) {
+        const url = `https://api.airtable.com/v0/${baseId}/${tableName}?filterByFormula={UPN}='${email}'`;
         console.log(`Fetching user details from: ${url}`);
         const response = await fetch(url, {
             headers: {
@@ -62,12 +70,55 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("User deleted successfully");
     }
 
-    // Function to open details modal with asset information
+    async function updateAssetStatus(assetId, assetType) {
+        const filterFormula = `filterByFormula=${encodeURIComponent(`{Asset ID}="${assetId}"`)}`;
+        const url = `https://api.airtable.com/v0/${baseId}/${assetsTableName}?${filterFormula}`;
+        console.log(`Updating asset status from: ${url}`);
+
+        try {
+            const response = await fetch(url, {
+                headers: {
+                    Authorization: `Bearer ${airtableApiKey}`
+                }
+            });
+
+            if (response.status === 403) {
+                throw new Error("Access denied: Check your API key and permissions.");
+            }
+
+            const data = await response.json();
+            if (data.records.length === 0) {
+                throw new Error(`${assetType} with ID ${assetId} not found`);
+            }
+
+            const assetRecordId = data.records[0].id;
+
+            const updateUrl = `https://api.airtable.com/v0/${baseId}/${assetsTableName}/${assetRecordId}`;
+            const updateResponse = await fetch(updateUrl, {
+                method: "PATCH",
+                headers: {
+                    Authorization: `Bearer ${airtableApiKey}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    fields: {
+                        Status: "spare"
+                    }
+                })
+            });
+
+            if (!updateResponse.ok) {
+                throw new Error(`Failed to update ${assetType} status to spare`);
+            }
+            console.log(`${assetType} status updated to spare`);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     function openDetailsModal(user) {
         console.log("Opening details modal for user:", user);
-        const userTableBody = document
-            .getElementById("userTable")
-            .querySelector("tbody");
+        const userTableBody = document.getElementById("userTable").querySelector("tbody");
         userTableBody.innerHTML = `
             <tr><td>Name:</td><td>${user.fields.Name}</td></tr>
             <tr><td>UPN:</td><td>${user.fields.UPN}</td></tr>
@@ -82,40 +133,32 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("userModal").style.display = "block";
     }
 
-    // Function to open confirmation modal
     function openConfirmationModal(userName) {
         console.log("Opening confirmation modal for user:", userName);
-        document.getElementById("confirmationMessage").textContent =
-            `${userName} deleted.`;
+        document.getElementById("confirmationMessage").textContent = `${userName} deleted.`;
         document.getElementById("confirmationModal").style.display = "block";
     }
 
-    // Event listener for form submission
-    document
-        .getElementById("contactForm")
-        .addEventListener("submit", async function (event) {
-            event.preventDefault();
-            console.log("Form submitted");
-            const name = document.getElementById("Name").value;
-            const email = document.getElementById("email").value;
-            console.log(`Form values - Name: ${name}, Email: ${email}`);
-            if (name && email) {
-                const user = await fetchUserDetails(name, email);
-                if (user) {
-                    openDetailsModal(user);
-                    document
-                        .getElementById("confirmButton")
-                        .setAttribute("data-record-id", user.id);
-                    document
-                        .getElementById("confirmButton")
-                        .setAttribute("data-user-name", user.fields.Name);
-                } else {
-                    alert("User not found in Airtable.");
-                }
+    document.getElementById("contactForm").addEventListener("submit", async function (event) {
+        event.preventDefault();
+        console.log("Form submitted");
+        const email = document.getElementById("email").value;
+        console.log(`Form values - Email: ${email}`);
+        if (email) {
+            const user = await fetchUserDetails(email);
+            if (user) {
+                openDetailsModal(user);
+                document.getElementById("modalSubmitButton").setAttribute("data-record-id", user.id);
+                document.getElementById("modalSubmitButton").setAttribute("data-user-name", user.fields.Name);
+                document.getElementById("modalSubmitButton").setAttribute("data-laptop-asset-id", user.fields["Laptop Asset ID"]);
+                document.getElementById("modalSubmitButton").setAttribute("data-smartphone-asset-id", user.fields["Smartphone Asset ID"]);
+            } else {
+                console.log("User not found in Airtable.");
+                alert("User not found in Airtable.");
             }
-        });
+        }
+    });
 
-    // Close modals
     document.querySelectorAll(".close").forEach((closeButton) => {
         closeButton.addEventListener("click", () => {
             console.log("Closing modal");
@@ -124,7 +167,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Close modals when clicking outside of them
     window.addEventListener("click", (event) => {
         if (event.target === document.getElementById("userModal")) {
             console.log("Closing user modal");
@@ -136,33 +178,39 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Event listener for confirm button in the first modal
-    document
-        .getElementById("confirmButton")
-        .addEventListener("click", async () => {
-            const recordId = document
-                .getElementById("confirmButton")
-                .getAttribute("data-record-id");
-            const userName = document
-                .getElementById("confirmButton")
-                .getAttribute("data-user-name");
-            console.log(
-                `Confirm button clicked - Record ID: ${recordId}, User Name: ${userName}`
-            );
+    const modalSubmitButton = document.getElementById("modalSubmitButton");
+
+    if (modalSubmitButton) {
+        modalSubmitButton.addEventListener("click", async () => {
+            const recordId = modalSubmitButton.getAttribute("data-record-id");
+            const userName = modalSubmitButton.getAttribute("data-user-name");
+            const laptopAssetId = modalSubmitButton.getAttribute("data-laptop-asset-id");
+            const smartphoneAssetId = modalSubmitButton.getAttribute("data-smartphone-asset-id");
+            
+            console.log(`Confirm button clicked - Record ID: ${recordId}, User Name: ${userName}, Laptop Asset ID: ${laptopAssetId}, Smartphone Asset ID: ${smartphoneAssetId}`);
+            
             if (recordId) {
                 try {
+                    if (laptopAssetId) {
+                        await updateAssetStatus(laptopAssetId, "Laptop");
+                    }
+                    if (smartphoneAssetId) {
+                        await updateAssetStatus(smartphoneAssetId, "Smartphone");
+                    }
                     await deleteUser(recordId);
                     document.getElementById("userModal").style.display = "none";
                     openConfirmationModal(userName);
                 } catch (error) {
-                    alert("Failed to delete user: " + error.message);
+                    console.error("Failed to delete user:", error);
                 }
             }
         });
+    } else {
+        console.error("modalSubmitButton not found in the DOM.");
+    }
 
-    // Event listener for homepage button in the confirmation modal
     document.getElementById("homeButton").addEventListener("click", () => {
         console.log("Redirecting to homepage");
-        window.location.href = "homepage.html"; // Replace with your homepage URL
+        window.location.href = "assetList.html"; // Replace with your homepage URL
     });
 });

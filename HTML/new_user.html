@@ -1,256 +1,283 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Create User</title>
-        <link rel="stylesheet" href="../CSS/new_user.css" />
-        <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
-            rel="stylesheet" />
-    </head>
-    <body>
-        <div class="alpha-message">
-            <p>
-                **This app is in alpha testing and may/will not work or look as
-                expected, soz**
-            </p>
-        </div>
-        <header class="header">
-            <div class="container">
-                <h1 class="header-title">Asset Management System</h1>
-                <nav class="main-nav">
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                      
-                        <li><a href="#">Requistion Form</a></li>
-                        <li><a href="#">Employee List</a></li>
-                        
-                        <li><a href="#">Connection Test</a></li>
-                          <li><a href="#">Delete User</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Log Out</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
-        <h2>Create User (Start date dont work)</h2>
-        <div class="container">
-            <form id="contactForm">
-                <div class="form-group">
-                    <label for="Name">Name:</label>
-                    <input type="text" id="Name" name="Name" required />
-                </div>
-                <div class="form-group">
-                    <label for="area">Area:</label>
-                        <select id="area" name="area" required>
-                        <option value="" disabled selected>
-                            Select an area
-                        </option>
-                        <option value="North">North</option>
-                        <option value="South">South</option>
-                        <option value="East">East</option>
-                        <option value="West">West</option>
-                        <option value="Northeast">Northeast</option>
-                        <option value="Northwest">Northwest</option>
-                        <option value="Southeast">Southeast</option>
-                        <option value="Southwest">Southwest</option>
-                        <option value="Senior Management">
-                            Senior Management
-                        </option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="jobTitle">Job Title:</label>
-                    <select id="jobTitle" name="jobTitle" required>
-                        <option value="" disabled selected>
-                            Select a job title
-                        </option>
-                        <option value="CEO (Chief Executive Officer)">
-                            CEO (Chief Executive Officer)
-                        </option>
-                        <option value="COO (Chief Operating Officer)">
-                            COO (Chief Operating Officer)
-                        </option>
-                        <option value="CFO (Chief Financial Officer)">
-                            CFO (Chief Financial Officer)
-                        </option>
-                        <option value="CTO (Chief Technology Officer)">
-                            CTO (Chief Technology Officer)
-                        </option>
-                        <option value="Managing Director - North">
-                            Managing Director - North
-                        </option>
-                        <option value="Managing Director - South">
-                            Managing Director - South
-                        </option>
-                        <option value="Managing Director - East">
-                            Managing Director - East
-                        </option>
-                        <option value="Managing Director - West">
-                            Managing Director - West
-                        </option>
-                        <option value="Managing Director - Southwest">
-                            Managing Director - Southwest
-                        </option>
-                        <option value="Managing Director - Northeast">
-                            Managing Director - Northeast
-                        </option>
-                        <option value="Managing Director - Southeast">
-                            Managing Director - Southeast
-                        </option>
-                        <option value="Managing Director - Northwest">
-                            Managing Director - Northwest
-                        </option>
-                        <option value="Area Manager - North">
-                            Area Manager - North
-                        </option>
-                        <option value="Area Manager - South">
-                            Area Manager - South
-                        </option>
-                        <option value="Area Manager - East">
-                            Area Manager - East
-                        </option>
-                        <option value="Area Manager - West">
-                            Area Manager - West
-                        </option>
-                        <option value="Area Manager - Southwest">
-                            Area Manager - Southwest
-                        </option>
-                        <option value="Area Manager - Northeast">
-                            Area Manager - Northeast
-                        </option>
-                        <option value="Area Manager - Southeast">
-                            Area Manager - Southeast
-                        </option>
-                        <option value="Area Manager - Northwest">
-                            Area Manager - Northwest
-                        </option>
-                        <option value="Sales Associate">Sales Associate</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="startDate">Start Date:</label>
-                    <input
-                        type="date"
-                        id="startDate"
-                        name="startDate"
-                        required />
-                </div>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Asset Management System</title>
+    <link rel="stylesheet" href="../CSS/styles.css" />
+    <link rel="stylesheet" href="../CSS/modal.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
+    <style>
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0; /* Remove all padding */
+        }
+        form {
+            padding: 20px; /* Reduce padding inside the form */
+            margin-top: 0; /* Remove top margin */
+           
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 900px; /* Set a wider max-width */
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Two columns */
+            grid-gap: 20px;
+            background-color: #ffffff; /* Add background color */
+            font-family: 'Poppins', sans-serif; /* Improve typography */
+            transition: all 0.3s ease-in-out;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold; /* Make label bold */
+            color: #333; /* Darker label color */
+        }
+        input[type="email"],
+        input[type="tel"],
+        input[type="text"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 15px; /* Increase padding */
+            margin-bottom: 15px;
+            border: 1px solid #ddd; /* Light border */
+            border-radius: 5px;
+            font-size: 16px; /* Increase font size */
+            background-color: #f9f9f9; /* Light background for inputs */
+            transition: all 0.3s ease-in-out; /* Smooth transition */
+        }
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        input[type="text"]:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #00796b; /* Highlight border on focus */
+            box-shadow: 0 0 5px rgba(0, 121, 107, 0.3); /* Subtle shadow on focus */
+            outline: none;
+        }
+        textarea {
+            grid-column: span 2; /* Span two columns */
+            resize: vertical;
+        }
+        button[type="submit"] {
+            color: #fff;
+            padding: 15px 20px; /* Increase padding for button */
+            border: none;
+            border-radius: 5px;
+            font-size: 18px; /* Increase font size for button */
+            width: 100%;
+            grid-column: span 2; /* Span two columns */
+            background-color: slategrey; /* Button background color */
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+        button[type="submit"]:hover {
+            background-color: darkslategray; /* Darker button on hover */
+        }
+        @media (max-width: 768px) {
+            form {
+                grid-template-columns: 1fr; /* Single column on small screens */
+            }
+            textarea,
+            button[type="submit"] {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1 class="header-title">TeamAsset Manager</h1>
+        <button id="darkModeToggle" title="Light/Dark mode"><i id="darkModeIcon" class="fas fa-moon"></i></button>
+        <h2 class="header">
+           New User 
+            <span class="info-icon-container">
+                <span class="info-icon">i
+                    <span class="tooltip">Add a new employee to the databse. This will assign equipment and add it to the asset register.</span>
+                </span>
+            </span>
+        </h2>
+    </header>
+    <header>
+        <div id="loggedIn"></div>
+        <div id="userDetails"></div>
+    </header>
+    <div class="sidebar">
+        <ul>
+            <li>
+                <a href="#" class="nav-link" data-target="home"><i class="fas fa-home icon"></i><span class="text">Home</span></a>
+            </li>
+            <li>
+                <a href="#" class="nav-link" data-target="requisition-form"><i class="fas fa-file-alt icon"></i><span class="text">Report a Fault</span></a>
+            </li>
+            <li>
+                <a href="#" class="nav-link" data-target="staff-list"><i class="fas fa-users icon"></i><span class="text">Asset Register</span></a>
+            </li>
+            <li>
+                <a href="#" class="nav-link" data-target="new-starter"><i class="fas fa-user-plus icon"></i><span class="text">New User</span></a>
+            </li>
+            <li>
+                <a href="#" class="nav-link" data-target="delete_user"><i class="fas fa-user-slash icon"></i><span class="text">Remove User</span></a>
+            </li>
+            <li>
+                <a href="#" class="nav-link" data-target="connection-test"><i class="fas fa-network-wired icon"></i><span class="text">Connection Test</span></a>
+            </li>
+            <li>
+                <a href="#" class="nav-link" data-target="contact"><i class="fas fa-envelope icon"></i><span class="text">Contact Us</span></a>
+            </li>
+            <li>
+                <a href="#" class="nav-link" data-target="about"><i class="fas fa-info-circle icon"></i><span class="text">About</span></a>
+            </li>
+            <li>
+                <a href="#" class="nav-link" data-target="logout"><i class="fas fa-sign-out-alt icon"></i><span class="text">Log Out</span></a>
+            </li>
+        </ul>
+    </div>
 
-                <div class="form-group">
-                    <label for="requestingManager">Requesting Manager:</label>
-                    <input
-                        type="text"
-                        id="requestingManager"
-                        name="requestingManager"
-                        required />
-                </div>
-                <input type="hidden" id="laptopModel" name="laptopModel" />
-                <input type="hidden" id="laptopAssetId" name="laptopAssetId" />
-                <input
-                    type="hidden"
-                    id="smartphoneModel"
-                    name="smartphoneModel" />
-                <input
-                    type="hidden"
-                    id="smartphoneAssetId"
-                    name="smartphoneAssetId" />
-                <button type="submit">Submit</button>
-            </form>
-        </div>
-        <footer class="footer">
-            <p>
-                &copy; 2024 Asset Management System. All rights reserved. |
-                Designed by
-                <a href="https://www.linkedin.com/in/richard-hamilton-319b35287"
-                    >R I Hamilton</a
-                >
-            </p>
-        </footer>
-        <!-- First Modal Structure -->
-        <div id="newEmployeeModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>New Employee Details</h2>
-                <div class="form-columns">
-                    <div class="column">
-                        <div class="form-group">
-                            <label for="modalName">Name:</label>
-                            <input type="text" id="modalName" disabled />
-                        </div>
-                        <div class="form-group">
-                            <label for="modalEmail">UPN/Email:</label>
-                            <input type="email" id="modalEmail" disabled />
-                        </div>
-                        <div class="form-group">
-                            <label for="modalArea">Area:</label>
-                            <input type="text" id="modalArea" disabled />
-                        </div>
-                        <div class="form-group">
-                            <label for="modalManager">Manager:</label>
-                            <input type="text" id="modalManager" disabled />
-                        </div>
-                        <div class="form-group">
-                            <label for="modalJobTitle">Job Title:</label>
-                            <input type="text" id="modalJobTitle" disabled />
-                        </div>
-                         <div class="form-group">
-                            <label for="modalStartDate">Start Date:</label>
-                            <input type="text" id="modalStartDate" disabled />
-                        </div>
-                    </div>
-                    <div class="column">
-                        <div class="form-group">
-                            <label for="modalLaptopModel">Laptop Model:</label>
-                            <input type="text" id="modalLaptopModel" disabled />
-                        </div>
-                        <div class="form-group">
-                            <label for="modalLaptopAssetId"
-                                >Laptop Asset ID:</label
-                            >
-                            <input
-                                type="text"
-                                id="modalLaptopAssetId"
-                                disabled />
-                        </div>
-                        <div class="form-group">
-                            <label for="modalSmartphoneModel"
-                                >Smartphone Model:</label
-                            >
-                            <input
-                                type="text"
-                                id="modalSmartphoneModel"
-                                disabled />
-                        </div>
-                        <div class="form-group">
-                            <label for="modalSmartphoneAssetId"
-                                >Smartphone Asset ID:</label
-                            >
-                            <input
-                                type="text"
-                                id="modalSmartphoneAssetId"
-                                disabled />
-                        </div>
-                    </div>
-                </div>
-                <div class="button-container">
-                    <button id="modalSubmitButton">Confirm</button>
-                </div>
+    <main class="container">
+        <form id="contactForm">
+            <div class="form-group">
+                <label for="Name">Name:</label>
+                <input type="text" id="Name" name="Name" required />
+            </div>
+            <div class="form-group">
+                <label for="area">Area:</label>
+                <select id="area" name="area" required>
+                    <option value="" disabled selected>Select an area</option>
+                    <option value="North">North</option>
+                    <option value="South">South</option>
+                    <option value="East">East</option>
+                    <option value="West">West</option>
+                    <option value="Northeast">Northeast</option>
+                    <option value="Northwest">Northwest</option>
+                    <option value="Southeast">Southeast</option>
+                    <option value="Southwest">Southwest</option>
+                    <option value="Senior Management">Senior Management</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="jobTitle">Job Title:</label>
+                <select id="jobTitle" name="jobTitle" required>
+                    <option value="" disabled selected>Select a job title</option>
+                    <option value="CEO (Chief Executive Officer)">CEO (Chief Executive Officer)</option>
+                    <option value="COO (Chief Operating Officer)">COO (Chief Operating Officer)</option>
+                    <option value="CFO (Chief Financial Officer)">CFO (Chief Financial Officer)</option>
+                    <option value="CTO (Chief Technology Officer)">CTO (Chief Technology Officer)</option>
+                    <option value="Managing Director - North">Managing Director - North</option>
+                    <option value="Managing Director - South">Managing Director - South</option>
+                    <option value="Managing Director - East">Managing Director - East</option>
+                    <option value="Managing Director - West">Managing Director - West</option>
+                    <option value="Managing Director - Southwest">Managing Director - Southwest</option>
+                    <option value="Managing Director - Northeast">Managing Director - Northeast</option>
+                    <option value="Managing Director - Southeast">Managing Director - Southeast</option>
+                    <option value="Managing Director - Northwest">Managing Director - Northwest</option>
+                    <option value="Area Manager - North">Area Manager - North</option>
+                    <option value="Area Manager - South">Area Manager - South</option>
+                    <option value="Area Manager - East">Area Manager - East</option>
+                    <option value="Area Manager - West">Area Manager - West</option>
+                    <option value="Area Manager - Southwest">Area Manager - Southwest</option>
+                    <option value="Area Manager - Northeast">Area Manager - Northeast</option>
+                    <option value="Area Manager - Southeast">Area Manager - Southeast</option>
+                    <option value="Area Manager - Northwest">Area Manager - Northwest</option>
+                    <option value="Sales Associate">Sales Associate</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" name="startDate" required />
+            </div>
+            <div class="form-group">
+                <label for="requestingManager">Requesting Manager:</label>
+                <input type="text" id="requestingManager" name="requestingManager" required />
+            </div>
+            <input type="hidden" id="laptopModel" name="laptopModel" />
+            <input type="hidden" id="laptopAssetId" name="laptopAssetId" />
+            <input type="hidden" id="smartphoneModel" name="smartphoneModel" />
+            <input type="hidden" id="smartphoneAssetId" name="smartphoneAssetId" />
+            <button type="submit">Submit</button>
+        </form>
+    </main>
+
+    <footer class="footer">
+        <p>
+            TeamAsset Manager &copy; 2024. All rights reserved. | Designed by
+            <a href="https://www.linkedin.com/in/richard-hamilton-319b35287">R I Hamilton</a>
+        </p>
+    </footer>
+
+    <!-- New Employee Modal Structure -->
+    <div id="newEmployeeModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Employee Details</h2>
+            <table>
+                <tr>
+                    <td>Name:</td>
+                    <td id="modalName"></td>
+                </tr>
+                <tr>
+                    <td>UPN/Email:</td>
+                    <td id="modalEmail"></td>
+                </tr>
+                <tr>
+                    <td>Area:</td>
+                    <td id="modalArea"></td>
+                </tr>
+                <tr>
+                    <td>Manager:</td>
+                    <td id="modalManager"></td>
+                </tr>
+                <tr>
+                    <td>Job Title:</td>
+                    <td id="modalJobTitle"></td>
+                </tr>
+                <tr>
+                    <td>Start Date:</td>
+                    <td id="modalStartDate"></td>
+                </tr>
+                <tr>
+                    <td>Smartphone Model:</td>
+                    <td id="modalSmartphoneModel"></td>
+                </tr>
+                <tr>
+                    <td>Smartphone Asset ID:</td>
+                    <td id="modalSmartphoneAssetId"></td>
+                </tr>
+                <tr>
+                    <td>Laptop Model:</td>
+                    <td id="modalLaptopModel"></td>
+                </tr>
+                <tr>
+                    <td>Laptop Asset ID:</td>
+                    <td id="modalLaptopAssetId"></td>
+                </tr>
+            </table>
+            <div class="button-container">
+                <button id="modalSubmitButton">Confirm</button>
             </div>
         </div>
-        <!-- Second Modal Structure -->
-        <div id="confirmationModal" class="modal">
-            <div class="modal-content">
-                <h2 id="confirmationMessage">New User Created</h2>
-                <button id="homeButton">Homepage</button>
-            </div>
+    </div>
+
+    <!-- Confirmation Modal Structure -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <h2 id="confirmationMessage">New User Created</h2>
+            <button id="homeButton">Homepage</button>
         </div>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/airtable/0.10.1/airtable.browser.js"></script>
-        <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-        <script src="../JavaScript/new_user.js"></script>
-    </body>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/airtable/0.10.1/airtable.browser.js"></script>
+    <script src="../JavaScript/darkMode.js"></script>
+    <script src="../JavaScript/new_user.js"></script>
+    <script src="../JavaScript/navLinks.js"></script>
+    <script src="../JavaScript/tooltip.js"></script>
+</body>
 </html>

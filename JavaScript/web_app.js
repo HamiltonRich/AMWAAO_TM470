@@ -9,22 +9,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Check if elements exist
     if (!userList || !searchInput || !formContainer) {
-        console.error(
-            "One or more required elements are missing from the HTML."
-        );
+        console.error("One or more required elements are missing from the HTML.");
         return;
     }
-
-    // Mapping of links to their corresponding HTML pages
-    const navLinks = {
-        "Home": "homepage.html",
-        "Data Export": "data_export.html",
-        "Requistion Form": "eForm.html",
-        "New Employee": "new_user.html",
-        "Connection Test": "connection_test.html",
-        Contact: "contact.html",
-        "Log Out": "index.html"
-    };
 
     // Add event listeners to each nav link
     document.querySelectorAll(".main-nav ul li a").forEach((link) => {
@@ -40,8 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Function to fetch data from Airtable
     function fetchAPIData() {
         console.log("Fetching data from Airtable API...");
-        const apiKey =
-            "pathlZBPR0j4BULEk.6690b0d15be652f21f7097302c4ec4cdbd3f765dd68e8f14a734b7f687c5c87f";
+        const apiKey = "pathlZBPR0j4BULEk.6690b0d15be652f21f7097302c4ec4cdbd3f765dd68e8f14a734b7f687c5c87f";
         const baseId = "appFgKdBEAupaPDJ5";
         const tableName = "tbl1MpLdQKzdhzXqe";
         const maxRecords = 500; // Adjust as per your needs
@@ -57,17 +43,13 @@ document.addEventListener("DOMContentLoaded", function () {
             })
                 .then((response) => {
                     if (!response.ok) {
-                        throw new Error(
-                            `HTTP error! Status: ${response.status}`
-                        );
+                        throw new Error(`HTTP error! Status: ${response.status}`);
                     }
                     return response.json();
                 })
                 .then((data) => {
                     console.log("Data fetched successfully:", data);
-                    usersData.push(
-                        ...data.records.map((record) => record.fields)
-                    );
+                    usersData.push(...data.records.map((record) => record.fields));
 
                     // Check if there are more records to fetch
                     if (data.offset) {
@@ -78,9 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         displayUsers(usersData); // Display all users once all data is fetched
                     }
                 })
-                .catch((error) =>
-                    console.error("Error fetching API data:", error)
-                );
+                .catch((error) => console.error("Error fetching API data:", error));
         };
 
         fetchData(); // Start fetching data
@@ -96,10 +76,8 @@ document.addEventListener("DOMContentLoaded", function () {
         if (searchTerm !== "") {
             const filteredUsers = users.filter(
                 (user) =>
-                    (user.Name &&
-                        user.Name.toLowerCase().startsWith(searchTerm)) ||
-                    (user.Area &&
-                        user.Area.toLowerCase().startsWith(searchTerm))
+                    (user.Name && user.Name.toLowerCase().startsWith(searchTerm)) ||
+                    (user.Area && user.Area.toLowerCase().startsWith(searchTerm))
             );
 
             console.log("Filtered users:", filteredUsers); // Debugging line to see filtered users
@@ -123,12 +101,10 @@ document.addEventListener("DOMContentLoaded", function () {
             formContainer.innerHTML = ""; // Clear formContainer if searchTerm is empty
         }
     }
-
+   
     // Function to open details modal with asset information
     function openDetailsModal(user) {
-        const userTableBody = document
-            .getElementById("userTable")
-            .querySelector("tbody");
+        const userTableBody = document.getElementById("userTable").querySelector("tbody");
         userTableBody.innerHTML = `
             <tr><td>Name:</td><td>${user.Name}</td></tr>
             <tr><td>UPN:</td><td>${user.UPN}</td></tr>

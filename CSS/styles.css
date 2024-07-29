@@ -1,0 +1,779 @@
+@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css);
+
+*,
+.alpha-message p,
+.footer p {
+    margin: 0;
+}
+.alpha-message,
+.header {
+    color: #fff;
+    text-align: center;
+}
+.main-nav ul,
+.sidebar ul {
+    padding: 0;
+    list-style: none;
+}
+.main-nav ul li a,
+.sidebar ul li a {
+    font-weight: 500;
+    text-decoration: none;
+}
+*,
+.search-input {
+    box-sizing: border-box;
+}
+.modal,
+.sidebar {
+    left: 0;
+    top: 0;
+    position: fixed;
+}
+.alpha-message,
+.header,
+.login-header h3,
+.login-header p,
+.modal-content,
+.tile,
+h2 {
+    text-align: center;
+}
+.footer,
+.modal,
+.sidebar {
+    position: fixed;
+}
+* {
+    padding: 0;
+    font-family: Roboto, sans-serif;
+}
+
+body {
+    background-color: #f5f7fa;
+    color: #333;
+    font-size: 16px;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin-bottom: 60px;
+}
+/* Base styles */
+body {
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Dark mode styles */
+body.dark-mode {
+    background-color: #000;
+    color: #fff;
+}
+
+/* Dark Mode Enhancements */
+body.dark-mode,
+body.dark-mode .alpha-message,
+body.dark-mode .header,
+body.dark-mode .footer,
+body.dark-mode .sidebar,
+body.dark-mode .container,
+body.dark-mode .content,
+body.dark-mode form,
+body.dark-mode .form-container,
+body.dark-mode .modal-content,
+body.dark-mode .user-info,
+body.dark-mode .tile,
+body.dark-mode .login-page,
+body.dark-mode .tiles-container,
+body.dark-mode .button-container,
+body.dark-mode .user-list li {
+    background-color: #000000; /* All backgrounds go black */
+    color: #fff; /* All text goes white */
+    border-color: #fff; /* All borders go white */
+}
+
+body.dark-mode a,
+body.dark-mode .main-nav ul li a,
+body.dark-mode .sidebar ul li a {
+    color: #fff; /* Links are also white */
+}
+
+body.dark-mode button,
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+    background-color: #333; /* Darker grey for inputs */
+    color: #fff; /* White text for inputs */
+    border: 1px solid #fff; /* White borders for inputs */
+}
+
+body.dark-mode .sidebar ul li a:hover,
+body.dark-mode .btn:hover,
+body.dark-mode .login-form button:hover,
+body.dark-mode button[type="submit"]:hover,
+body.dark-mode button[type="button"]:hover {
+    background-color: #444; /* Darker background on hover */
+}
+
+/* Ensuring that dark mode styles get applied specifically and effectively */
+body.dark-mode * {
+    box-shadow: none; /* Remove shadows unless necessary */
+}
+
+/* Toggle button styles */
+#darkModeToggle {
+    position: fixed;
+    top: 10px;
+    right: 59px; /* Move the button further right */
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: slategray;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+/* Tooltip styles */
+#darkModeToggle::after {
+    content: attr(title);
+    position: absolute;
+    top: 50%;
+    left: -137px; /* Adjust this value based on the width of the tooltip */
+    transform: translateY(-50%);
+    background-color: black;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    white-space: nowrap;
+    font-size: 14px;
+}
+
+#darkModeToggle:hover::after {
+    opacity: 1;
+}
+
+body.dark-mode #darkModeToggle {
+    background-color: #444;
+    color: #e0e0e0;
+}
+
+h2 {
+    font-size: 1.5em;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+.alpha-message {
+    background-color: red;
+    border-left: 4px solid gold;
+    padding: 10px;
+    font-weight: 500;
+}
+.header,
+.sidebar {
+    background-color: #708090;
+}
+#userTable td:first-child,
+.close,
+.footer a,
+.header-title,
+.login-header h3,
+.tile h2,
+label {
+    font-weight: 700;
+}
+.header {
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+.user-info,
+.user-list li {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.header-title {
+    font-size: 1.8em;
+}
+.main-nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+.sidebar,
+.sidebar ul li a {
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+}
+.main-nav ul li {
+    display: inline-block;
+}
+.main-nav ul li a {
+    color: #fff;
+    padding: 5px 10px;
+    transition:
+        color 0.3s,
+        background-color 0.3s;
+}
+.main-nav ul li a:focus,
+.main-nav ul li a:hover {
+    color: #f39c12;
+}
+.sidebar {
+    width: 43px;
+    height: 100vh;
+    padding-top: 80px;
+    align-items: center;
+}
+.user-info,
+.user-list li,
+form {
+    background-color: #fff;
+}
+.sidebar ul li a .text,
+.user-info {
+    display: none;
+}
+.sidebar ul {
+    width: 100%;
+}
+.sidebar ul li {
+    width: 100%;
+    position: relative;
+}
+.sidebar ul li a {
+    align-items: center;
+    padding: 20px 0;
+    position: relative;
+    transition: background-color 0.3s;
+}
+.btn:hover,
+.login-form button:hover,
+.sidebar ul li a:focus,
+.sidebar ul li a:hover,
+button#goToHomepageButton:hover,
+button#modalSubmitButton:hover,
+button[type="button"]:hover,
+button[type="submit"]:hover {
+    background-color: #2f4f4f;
+}
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5vh; 
+    margin-left: 78px; 
+    width: calc(100% - 200px); 
+}
+.sidebar ul li a .icon {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+.sidebar ul li a:hover .text {
+    display: block;
+    position: absolute;
+    left: 50px;
+    background-color: #000;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    z-index: 1;
+    transition: opacity 0.3s;
+    opacity: 1;
+}
+.sidebar ul li a .text::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -5px;
+    transform: translateY(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent #000 transparent transparent;
+}
+.container {
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    padding: 15px;
+    margin-left: 56px;
+}
+.search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 79%; /* Adjust as necessary */
+    margin: 0 auto; /* Center the container itself */
+}
+
+/* Center the search input box */
+.search-input {
+    width: 55%; /* Adjust the width as needed */
+    padding: 9px;
+    border-radius: 15px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    margin: 0 auto; /* Center horizontally */
+}
+
+/* Style and center each result item */
+.user-list {
+    width: 100%; /* Ensure the list takes full width */
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user-list li {
+    list-style: none;
+    width: 79%; /* Adjust the width as needed */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 5px !important; /* Use !important to ensure it's applied */
+    cursor: pointer;
+    transition:
+        transform 0.3s,
+        box-shadow 0.3s;
+    margin: 0 auto; /* Center horizontally */
+}
+.login-form button,
+button[type="submit"] {
+    background-color: #708090;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+.tile:hover,
+.user-list li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+}
+.user-info {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+}
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+form {
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 499px;
+    margin: 0 auto;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+input[type="email"],
+input[type="tel"],
+input[type="text"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 11px;
+}
+textarea {
+    resize: vertical;
+}
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.checkbox-label input[type="checkbox"] {
+    margin-right: 10px;
+}
+button[type="submit"] {
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+}
+.modal {
+    display: none;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+}
+.form,
+.tile {
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+.close:focus,
+.close:hover {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+#userTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+#userTable td,
+#userTable th {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin-left: 60px;
+}
+.form {
+    max-width: 426px;
+    margin: 0 auto;
+    padding: 33px;
+    border-radius: 10px;
+}
+.login-header h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+.login-header p {
+    font-size: 1.2em;
+    color: #555;
+    margin-bottom: 20px;
+}
+.login-form button,
+.login-form input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+}
+.login-form input {
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+.login-form button {
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-weight: 700;
+}
+.tiles-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-left: 60px;
+    padding: 69px;
+}
+.tile {
+    width: calc(33% - 40px);
+    margin: 25px;
+    padding: 32px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition:
+        transform 0.3s,
+        box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+}
+#export-button,
+.btn {
+    border: none;
+    display: inline-block;
+    font-size: 16px;
+    text-decoration: none;
+    background-color: #708090;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center;
+}
+.tile h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+.button-container {
+    margin-top: 20px;
+}
+.btn {
+    padding: 10px 25px;
+    border-radius: 5px;
+}
+#export-button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+#export-button:hover {
+    background-color: #45a049;
+}
+#export-button:active {
+    background-color: #3e8e41;
+}
+.footer {
+    background-color: #708090;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    bottom: 0;
+    width: 100%;
+    z-index: 999;
+}
+.footer a {
+    color: #fff;
+    text-decoration: none;
+}
+.footer a:hover {
+    text-decoration: underline;
+}
+button#goToHomepageButton,
+button#modalSubmitButton,
+button[type="button"] {
+    background-color: #708090;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+}
+
+/* Additional Styles for User Info Initials */
+#loggedIn {
+    position: absolute;
+    top: 1px;
+    right: 10px;
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    color: slategray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: 2px solid slategray;
+    cursor: pointer;
+}
+
+#userDetails {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    background-color: white;
+    border: 1px solid slategray;
+    padding: 10px;
+    border-radius: 5px;
+    width: 200px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+#userInfo:hover + #userDetails {
+    display: block;
+}
+
+/* Additional Styles for the Contact Page */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 900px;
+    width: 100%;
+    margin: 20px auto;
+}
+.left-container {
+    background-color: #708090;
+    color: #fff;
+    padding: 40px;
+    flex: 1;
+}
+.left-container h2 {
+    font-size: 1.8em;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+.left-container p {
+    font-size: 1em;
+    line-height: 1.6;
+}
+.right-container {
+    flex: 2;
+    padding: 40px;
+}
+.right-inner-container h2 {
+    font-size: 1.8em;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+.right-inner-container p {
+    font-size: 1em;
+    margin-bottom: 20px;
+}
+.right-inner-container form {
+    display: flex;
+    flex-direction: column;
+}
+.right-inner-container input[type="text"],
+.right-inner-container input[type="email"],
+.right-inner-container input[type="tel"],
+.right-inner-container textarea {
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.right-inner-container button[type="submit"] {
+    padding: 10px 20px;
+    background-color: slategray;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+.right-inner-container button[type="submit"]:hover {
+    background-color: #45a049;
+}
+  .content {
+            margin-left: 44px; /* Adjust according to sidebar width */
+            padding: 20px 40px; /* Add padding */
+            background-color: #fff; /* White background for content area */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for a lifted effect */
+            border-radius: 10px; /* Rounded corners */
+            max-width: calc(119% - 240px); /* Ensure it fits within the screen */
+            box-sizing: border-box;
+        }
+
+        .image-section img {
+            width: 102%;
+            height: 382px;
+            border-radius: 10px; /* Rounded corners for the image */
+            display: block;
+            margin-bottom: 6px;
+        }
+
+
+.header-title {
+    display: inline-block;
+    margin-right: auto;
+}
+
+
+
+.info-icon-container {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 10px !important; /* Adjust spacing as needed */
+    position: relative !important; /* Add this */
+}
+
+.info-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    width: 20px;
+    height: 20px;
+    background-color: #fff !important;
+    color: slategray!important;
+    text-align: center;
+    line-height: 20px;
+    border-radius: 50% !important;
+    cursor: pointer;
+    position: relative !important; /* Add this */
+}
+
+.tooltip {
+    visibility: hidden !important;
+    width: 400px !important; /* Set maximum width for the tooltip */
+    height: 120px !important;
+    background-color: #555 !important;
+    color: #fff !important;
+    text-align: left !important; /* Align text to the left */
+    border-radius: 5px !important;
+    padding: 5px 10px !important; /* Adjust padding */
+    position: absolute !important;
+    z-index: 1 !important;
+    top: 30px !important; /* Adjust position */
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    opacity: 0 !important;
+    transition: opacity 0.3s !important;
+    white-space: normal !important; /* Enable text wrapping */
+    overflow-wrap: break-word !important; /* Ensure long words break correctly */
+}
+
+.tooltip::after {
+    content: "" !important;
+    position: absolute !important;
+    top: -5px !important;
+    left: 50% !important;
+    margin-left: -5px !important;
+    border-width: 5px !important;
+    border-style: solid !important;
+    border-color: transparent transparent #555 transparent !important;
+}
+
+.info-icon:hover .tooltip {
+    visibility: visible !important;
+    opacity: 1 !important;
+}
