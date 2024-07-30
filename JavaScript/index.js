@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
     const users = [
-     const users = [
     { upn: "rich", password: "rich", role: "Senior Management", region: "all" },
     { upn: "carla.hamilton@hamiltonsales.com", password: "carla", role: "Senior Management", region: "all" },
     { upn: "poppy@hamiltonsales.com", password: "poppy", role: "Senior Management", region: "all" },
@@ -52,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (user) {
                 sessionStorage.setItem("loggedInUser", JSON.stringify(user));
 
-                window.location.href = "assetlist.html"; // Redirect to asset list page
+                window.location.href = "assetList.html"; // Redirect to asset list page
 
               
 
