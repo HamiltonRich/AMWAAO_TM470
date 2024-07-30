@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 window.location.href = "assetlist.html"; // Redirect to asset list page
 
-                window.location.href = "HTML/assetList.html"; // Redirect to asset list page
+              
 
             } else {
                 alert("Invalid username or password");
