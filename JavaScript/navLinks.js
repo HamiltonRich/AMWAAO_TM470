@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "staff-list": "web_app.html",
         "new-starter": "new_user.html",
         delete_user: "delete_user.html",
-        "connection-test": "connection_test.html",
+        "Connection-test": "connection_test.html",
         contact: "contact.html",
         about: "about.html", // Added the about page
         logout: "../index.html"
