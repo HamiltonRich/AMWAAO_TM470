@@ -58,7 +58,7 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    margin-bottom: 60px;
+    margin-bottom: 58px;
 }
 /* Base styles */
 body {
@@ -704,11 +704,12 @@ button[type="button"] {
         }
 
         .image-section img {
-            width: 102%;
-            height: 382px;
+            width: 50%;
+            height: 224px;
             border-radius: 10px; /* Rounded corners for the image */
             display: block;
             margin-bottom: 6px;
+              margin: 0 auto 6px auto; /* Centers the image horizontally and sets bottom margin */
         }
 
 
