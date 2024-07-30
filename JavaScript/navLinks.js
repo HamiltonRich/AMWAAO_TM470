@@ -61,10 +61,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const navLinks = {
         home: "assetList.html",
         "requisition-form": "eForm.html",
+<<<<<<< HEAD
         "staff-list": "web_app.html",
         "new-starter": "new_user.html",
         delete_user: "delete_user.html",
         "connection-test": "Connection_test.html",
+=======
+      
+        "staff-list": "web_app.html",
+        "new-starter": "new_user.html",
+        delete_user: "delete_user.html",
+        "Connection-test": "connection_test.html",
+>>>>>>> fce93ef28d3edace652e935d821d69135784e71e
         contact: "contact.html",
         about: "about.html",
         logout: "index.html"

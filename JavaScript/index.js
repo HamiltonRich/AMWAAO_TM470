@@ -96,7 +96,11 @@ document.addEventListener("DOMContentLoaded", function () {
             const user = users.find((user) => user.upn === username && user.password === password);
             if (user) {
                 sessionStorage.setItem("loggedInUser", JSON.stringify(user));
+<<<<<<< HEAD
                 window.location.href = "assetlist.html"; // Redirect to asset list page
+=======
+                window.location.href = "HTML/assetList.html"; // Redirect to asset list page
+>>>>>>> fce93ef28d3edace652e935d821d69135784e71e
             } else {
                 alert("Invalid username or password");
             }
