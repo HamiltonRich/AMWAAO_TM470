@@ -1,66 +1,73 @@
 document.addEventListener("DOMContentLoaded", function () {
+    console.log("DOM fully loaded and parsed");
+
     // Tooltip functionality
     const infoIcon = document.querySelector(".info-icon");
     const tooltip = document.querySelector(".tooltip");
 
-    infoIcon.addEventListener("mouseenter", () => {
-        // Show tooltip to get accurate bounding box
-        tooltip.style.visibility = "visible";
-        tooltip.style.opacity = "1";
+    if (infoIcon && tooltip) {
+        infoIcon.addEventListener("mouseenter", () => {
+            console.log("Mouse entered info icon");
+            // Show tooltip to get accurate bounding box
+            tooltip.style.visibility = "visible";
+            tooltip.style.opacity = "1";
 
-        const tooltipRect = tooltip.getBoundingClientRect();
-        const windowWidth = window.innerWidth;
-        const windowHeight = window.innerHeight;
+            const tooltipRect = tooltip.getBoundingClientRect();
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
 
-        // Reset any previous styling
-        tooltip.style.left = "50%";
-        tooltip.style.right = "auto";
-        tooltip.style.transform = "translateX(-50%)";
-        tooltip.style.top = "125%"; // Position below the icon
-        tooltip.style.bottom = "auto";
-
-        // Adjust if the tooltip goes beyond the right edge
-        if (tooltipRect.right > windowWidth) {
-            tooltip.style.left = "auto";
-            tooltip.style.right = "0";
-            tooltip.style.transform = "translateX(-10%)";
-        }
-
-        // Adjust if the tooltip goes beyond the left edge
-        if (tooltipRect.left < 0) {
-            tooltip.style.left = "10px";
+            // Reset any previous styling
+            tooltip.style.left = "50%";
             tooltip.style.right = "auto";
-            tooltip.style.transform = "none";
-        }
+            tooltip.style.transform = "translateX(-50%)";
+            tooltip.style.top = "125%"; // Position below the icon
+            tooltip.style.bottom = "auto";
 
-        // Adjust if the tooltip goes beyond the bottom edge
-        if (tooltipRect.bottom > windowHeight) {
-            tooltip.style.top = "auto";
-            tooltip.style.bottom = "125%"; // Position above the icon
-        }
+            // Adjust if the tooltip goes beyond the right edge
+            if (tooltipRect.right > windowWidth) {
+                tooltip.style.left = "auto";
+                tooltip.style.right = "0";
+                tooltip.style.transform = "translateX(-10%)";
+            }
 
-        // Hide tooltip again to wait for hover
-        tooltip.style.visibility = "hidden";
-        tooltip.style.opacity = "0";
-    });
+            // Adjust if the tooltip goes beyond the left edge
+            if (tooltipRect.left < 0) {
+                tooltip.style.left = "10px";
+                tooltip.style.right = "auto";
+                tooltip.style.transform = "none";
+            }
 
-    infoIcon.addEventListener("mouseleave", () => {
-        tooltip.style.visibility = "hidden";
-        tooltip.style.opacity = "0";
-    });
+            // Adjust if the tooltip goes beyond the bottom edge
+            if (tooltipRect.bottom > windowHeight) {
+                tooltip.style.top = "auto";
+                tooltip.style.bottom = "125%"; // Position above the icon
+            }
+
+            // Hide tooltip again to wait for hover
+            tooltip.style.visibility = "hidden";
+            tooltip.style.opacity = "0";
+        });
+
+        infoIcon.addEventListener("mouseleave", () => {
+            console.log("Mouse left info icon");
+            tooltip.style.visibility = "hidden";
+            tooltip.style.opacity = "0";
+        });
+    } else {
+        console.error("Info icon or tooltip not found.");
+    }
 
     // Mapping of data-target values to their corresponding HTML pages
     const navLinks = {
         home: "assetList.html",
         "requisition-form": "eForm.html",
-      ,
         "staff-list": "web_app.html",
         "new-starter": "new_user.html",
         delete_user: "delete_user.html",
-        "connection-test": "connection_test.html",
+        "connection-test": "Connection_test.html",
         contact: "contact.html",
-        about: "about.html", // Added the about page
-        logout: "../index.html"
+        about: "about.html",
+        logout: "index.html"
     };
 
     // Display logged-in user's info
@@ -161,6 +168,7 @@ document.addEventListener("DOMContentLoaded", function () {
         link.addEventListener("click", function (event) {
             event.preventDefault(); // Prevent default link behavior
             const target = this.getAttribute("data-target");
+            console.log(`Nav link clicked: ${target}`);
             if (navLinks[target]) {
                 window.location.href = navLinks[target];
             } else {

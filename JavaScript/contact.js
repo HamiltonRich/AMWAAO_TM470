@@ -1,33 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const userList = document.getElementById("userList");
-    const searchInput = document.getElementById("searchInput");
-    const formContainer = document.getElementById("userInfo");
-    let usersData = [];
-    let allUsersDisplayed = false; // Track if all users are displayed
-
-    // Event listener for the logout button
-    const logoutButton = document.getElementById("logoutButton");
-    logoutButton.addEventListener("click", function () {
-        // Redirect to the login page
-        window.location.href = "login.html";
-    });
-
-    // Event listener for the contact link
-    const contactLink = document.getElementById("contact");
-    contactLink.addEventListener("click", function (event) {
-        event.preventDefault(); // Prevent default link behavior
-        // Redirect to the contact page
-        window.location.href = "contact.html";
-    });
-
-    // Event listener for the home link
-    const homeLink = document.getElementById("homeLink");
-    homeLink.addEventListener("click", function (event) {
-        event.preventDefault(); // Prevent default link behavior
-        // Redirect to the homepage
-        window.location.href = "homepage.html";
-    });
-
+  
     // Identify the contact form
     const contactForm = document.getElementById("contactForm");
     console.log("Contact form:", contactForm);
