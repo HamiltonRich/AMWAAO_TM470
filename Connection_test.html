@@ -17,10 +17,10 @@
         <h1 class="header-title">TeamAsset Manager</h1>
         <button id="darkModeToggle" title="Light/Dark mode"><i id="darkModeIcon" class="fas fa-moon"></i></button>
         <h2 class="header">
-            Database Connection Test
+           Tools
             <span class="info-icon-container">
                 <span class="info-icon">i
-                    <span class="tooltip">Once the button is click, it will perform a connection test between the Aitrable database and TeamAsset Manager</span>
+                    <span class="tooltip">Check if the database is connected or export data to a csv.</span>
                 </span>
             </span>
         </h2>
@@ -37,7 +37,12 @@
     <li><a href="#" class="nav-link" data-target="staff-list"><i class="fas fa-users icon"></i><span class="text">Asset Register</span></a></li>
     <li><a href="#" class="nav-link" data-target="new-starter"><i class="fas fa-user-plus icon"></i><span class="text">New User</span></a></li>
     <li><a href="#" class="nav-link" data-target="delete_user"><i class="fas fa-user-slash icon"></i><span class="text">Remove User</span></a></li>
-    <li><a href="#" class="nav-link" data-target="connection-test"><i class="fas fa-network-wired icon"></i><span class="text">Connection Test</span></a></li>
+    <li>
+    <a href="#" class="nav-link" data-target="connection-test">
+        <i class="fas fa-tools icon"></i><span class="text">Tools</span>
+    </a>
+</li>
+
     <li><a href="#" class="nav-link" data-target="contact"><i class="fas fa-envelope icon"></i><span class="text">Contact Us</span></a></li>
     <li><a href="#" class="nav-link" data-target="about"><i class="fas fa-info-circle icon"></i><span class="text">About</span></a></li>
     <li><a href="#" class="nav-link" data-target="logout"><i class="fas fa-sign-out-alt icon"></i><span class="text">Log Out</span></a></li>
@@ -48,9 +53,10 @@
     <div class="container">
         <main>
             <div class="button-container">
-                <button id="testConnectionBtn" class="btn btn-primary">Test API Connection</button>
+                <button id="testConnectionBtn" class="btn btn-primary">Database Connection Test</button>
+                <button id="exportAssetRegisterBtn" class="btn btn-secondary">Export Asset Register</button>
+                <button id="exportAppLogsBtn" class="btn btn-secondary">Export Application Logs</button>
             </div>
-            
         </main>
     </div>
     <footer class="footer">
@@ -76,10 +82,10 @@
             </div>
         </div>
     </div>
- <script src="JavaScript/clickLogger.js"></script>
+    <script src="JavaScript/clickLogger.js"></script>
     <script src="JavaScript/darkMode.js"></script>
-    <script src="JavaScript/Connection_test.js"> </script>
-      <script src="JavaScript/navLinks.js"></script>
-     <script src="JavaScript/tooltip.js"></script>
+    <script src="JavaScript/Connection_test.js"></script>
+    <script src="JavaScript/navLinks.js"></script>
+    <script src="JavaScript/tooltip.js"></script>
 </body>
 </html>

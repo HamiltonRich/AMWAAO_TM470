@@ -267,11 +267,16 @@ button[type="submit"]:hover {
 }
 .button-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 5vh; 
-    margin-left: 78px; 
+    height: 15vh; 
+    margin-left: 77px; 
     width: calc(100% - 200px); 
+}
+
+.button-container .btn {
+    margin: 10px 0;
 }
 .sidebar ul li a .icon {
     font-size: 1.2em;
