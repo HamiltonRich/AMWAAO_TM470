@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const airtableTableName = "tbl1MpLdQKzdhzXqe";
 
     document.getElementById("Name").addEventListener("blur", async function () {
-        const name = this.value;
+        const name = this.value.trim();
         console.log("Name input blurred, value: " + name);
 
         if (name) {
@@ -93,7 +93,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     async function searchUserByName(name) {
-        const url = `https://api.airtable.com/v0/${airtableBaseId}/${airtableTableName}?filterByFormula=Name="${name}"`;
+        const lowerCaseName = name.toLowerCase();
+        const url = `https://api.airtable.com/v0/${airtableBaseId}/${airtableTableName}?filterByFormula=LOWER(Name)="${lowerCaseName}"`;
         const headers = {
             Authorization: `Bearer ${airtableApiKey}`
         };
